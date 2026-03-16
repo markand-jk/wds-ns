@@ -9,10 +9,10 @@ jobs:
     runs-on: windows-2022
 
     env:
-      WDS_PATH: ".\windows-driver-samples"
-      CODEQL_BIN: ".\codeql\codeql.exe"
-      X64_DB_PATH: ".\wds-release-x64"
-      ARM64_DB_PATH: ".\wds-release-x64"
+      WDS_PATH: "${{ github.workspace }}\\windows-driver-samples"
+      CODEQL_BIN: "${{ github.workspace }}\\codeql\codeql.exe"
+      X64_DB_PATH: "${{ github.workspace }}\\wds-release-x64"
+      ARM64_DB_PATH: "${{ github.workspace }}\\wds-release-x64"
       DEST: "${{ github.workspace }}\\extracted_drivers"
 
     steps:
