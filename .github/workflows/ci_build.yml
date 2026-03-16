@@ -10,8 +10,8 @@ jobs:
     runs-on: windows-2022
 
     env:
-      WDS_PATH: "C:\\workspace\\windows-driver-samples"
-      DEST: "C:\\workspace\\extracted_drivers"
+      WDS_PATH: "${{ github.workspace }}\\windows-driver-samples"
+      DEST: "${{ github.workspace }}\\extracted_drivers"
 
     steps:
       - name: Checkout Microsoft Samples
