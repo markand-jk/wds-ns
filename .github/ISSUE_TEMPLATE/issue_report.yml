@@ -11,187 +11,69 @@ body:
         Thanks for taking the time to fill out this bug report!  
         Please provide as much detail as possible.
 
-  # Summary
   - type: input
     id: summary
     attributes:
-      label: Bug Summary
-      description: Provide a clear and concise summary of the issue.
-      placeholder: Short description...
+      label: "Bug Summary"
+      description: "Provide a clear and concise summary of the issue."
+      placeholder: "Short description..."
     validations:
       required: true
 
-  # Priority
   - type: dropdown
     id: priority
     attributes:
-      label: Priority
+      label: "Priority"
       options:
-        - P0 - Critical
-        - P1 - High
-        - P2 - Medium
-        - P3 - Low
+        - "P0 - Critical"
+        - "P1 - High"
+        - "P2 - Medium"
+        - "P3 - Low"
     validations:
       required: true
 
-  # Severity
   - type: dropdown
     id: severity
     attributes:
-      label: Severity
+      label: "Severity"
       options:
-        - Blocker
-        - Critical
-        - Major
-        - Minor
-        - Trivial
+        - "Blocker"
+        - "Critical"
+        - "Major"
+        - "Minor"
+        - "Trivial"
     validations:
       required: true
 
-  # Version
   - type: input
     id: version
     attributes:
-      label: Affected Version
-      placeholder: ex: v2.4.1
+      label: "Affected Version"
+      placeholder: "ex: v2.4.1"
 
-  ############################################################
-  # NEW FIELDS YOU REQUESTED
-  ############################################################
-
-  # Phase
-  - type: dropdown
-    id: phase
-    attributes:
-      label: Phase
-      options:
-        - Phase 1
-        - Phase 2
-        - Phase 3
-    validations:
-      required: true
-
-  # Driver Category
-  - type: dropdown
-    id: driver_category
-    attributes:
-      label: Driver Category
-      options:
-        - TrEE
-        - Audio
-        - AVStreaming
-        - Bluetooth
-        - Filesystem
-        - General
-        - GNSS
-        - GPIO
-        - HID
-        - Input
-        - Network
-        - NFC
-        - Power
-        - POS
-        - Print
-        - PRM
-        - SD
-        - Security
-        - Sensors
-        - Serial
-        - Setup
-        - Battery
-        - Smartcard
-        - SerialBus
-        - Storage
-        - Tools
-        - USB
-        - Video
-        - WIA
-        - WIL
-        - WMI
-    validations:
-      required: true
-
-  # Driver Name (short list placeholder — replace with full list)
-  - type: dropdown
-    id: driver_name
-    attributes:
-      label: Driver Name
-      description: Select the affected driver.
-      options:
-        - "TrEE sample"
-        - "Audio Codec Driver Sample"
-        - "AVStream Camera Sample Driver"
-        - "Bluetooth Echo L2CAP Profile Driver"
-        - "CDFS File System Driver"
-        - "KMDF Echo Sample"
-        - "SimDevice KMDF Driver"
-        - "Keyboard Input WDF Filter Driver (Kbfiltr)"
-        - "NDIS 6.0 Filter Driver"
-        - "NFC CX client driver sample"
-        - "PEP ACPI Sample"
-        - "Magnetic Stripe Reader Driver Sample"
-        - "Standard SD Host Controller Miniport"
-        - "Custom Sensor Driver Sample"
-        - "Serial Port Driver"
-        - "SimBatt: Simulated Battery Driver Sample"
-        - "PCMCIA Smart Card Driver"
-        - "Skeleton I2C Sample Driver"
-        - "LSI_U3 StorPort Miniport Driver"
-        - "USBView sample application"
-        - "Indirect Display Driver Sample"
-        - "Production Scanning WIA 2.0 Driver Sample"
-        - "Windows Implementation Libraries (WIL)"
-        - "Sample KMDF Driver Implementing a WMI Data Provider"
-      validations:
-        required: false
-
-  # OS / Environment
   - type: dropdown
     id: environment
     attributes:
-      label: OS / Environment
+      label: "Environment"
       options:
-        - Windows 10/x32
-        - Windows 10/x64
-        - Windows 11 22H2/x64
-        - Windows 11 23H2/x64
-        - Windows 11 24H2/x64
-        - Windows 11 25H2/x64
-        - Windows 11 26H1/x64
-        - Windows 11 24H2/arm64
-        - Windows 11 25H2/arm64
-        - Windows 11 26H2/arm64
+        - "Production"
+        - "Staging"
+        - "QA"
+        - "Development"
+        - "Local"
     validations:
       required: true
 
-  # Testcase
   - type: input
-    id: testcase
+    id: component
     attributes:
-      label: HLK Testcase
-      placeholder: Device.DeviceStatus.Basic
-    validations:
-      required: false
+      label: "Component / Module"
+      placeholder: "ex: Authentication Service, UI Header..."
 
-  # Failure Reason
-  - type: textarea
-    id: failure_reason
-    attributes:
-      label: Failure Reason
-      description: Provide detailed analysis or logs.
-      placeholder: Add logs, observations, notes...
-    validations:
-      required: false
-
-  ############################################################
-  # ORIGINAL TEMPLATE CONTINUES BELOW
-  ############################################################
-
-  # Steps
   - type: textarea
     id: steps
     attributes:
-      label: Steps to Reproduce
+      label: "Steps to Reproduce"
       placeholder: |
         1. Go to...
         2. Click...
@@ -200,62 +82,55 @@ body:
     validations:
       required: true
 
-  # Expected Behavior
   - type: textarea
     id: expected
     attributes:
-      label: Expected Behavior
+      label: "Expected Behavior"
     validations:
       required: true
 
-  # Actual Behavior
   - type: textarea
     id: actual
     attributes:
-      label: Actual Behavior
-      description: What actually happened?
+      label: "Actual Behavior"
+      description: "What actually happened?"
     validations:
       required: true
 
-  # Impact
   - type: textarea
     id: impact
     attributes:
-      label: Impact Assessment
-      description: Describe business/user impact.
+      label: "Impact Assessment"
+      description: "Describe who is impacted, frequency, and business/user impact."
 
-  # Acceptance Criteria
   - type: textarea
     id: criteria
     attributes:
-      label: Acceptance Criteria
+      label: "Acceptance Criteria"
       placeholder: |
         - [ ] Condition 1
         - [ ] Condition 2
         - [ ] Condition 3
 
-  # Logs
   - type: textarea
     id: logs
     attributes:
-      label: Logs / Console Output
+      label: "Logs / Console Output"
       render: shell
-      placeholder: Paste logs here...
+      placeholder: "Paste logs here..."
 
-  # Attachments
   - type: textarea
     id: attachments
     attributes:
-      label: Screenshots or Videos
-      description: Upload screenshots or drag & drop files.
+      label: "Screenshots or Videos"
+      description: "Upload screenshots or drag & drop files."
 
-  # Final checklist
   - type: checkboxes
     id: checks
     attributes:
-      label: Pre-Submission Checks
+      label: "Pre-Submission Checks"
       options:
-        - label: I have searched existing issues
+        - label: "I have searched existing issues"
           required: true
-        - label: I have attached necessary logs/screenshots
+        - label: "I have attached necessary logs/screenshots"
           required: false
