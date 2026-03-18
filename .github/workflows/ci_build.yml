@@ -48,9 +48,20 @@ jobs:
           Write-Host "[+] Delete other drivers, except audio"
           cd "$env:WDS_PATH"
           Remove-Item "TrEE" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "bluetooth" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "filesys" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "g*" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "hid" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "n*" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "p*" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "s*" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "t*" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "usb" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "video" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "wia" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "wmi" -Recurse -Force -ErrorAction SilentlyContinue
+          dir
           exit 1
-
-
 
       - name: Initialize CodeQL Packs
         shell: pwsh
