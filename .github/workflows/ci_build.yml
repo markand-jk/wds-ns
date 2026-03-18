@@ -42,6 +42,16 @@ jobs:
           Write-Host "[+] Verifying CodeQL installation..."
           & $env:CODEQL_BIN --version
 
+      - name: Delete Other Drivers (For Now...)
+        shell: pwsh
+        run: |
+          Write-Host "[+] Delete other drivers, except audio"
+          cd "$env:WDS_PATH"
+          Remove-Item "TrEE" -Recurse -Force -ErrorAction SilentlyContinue
+          exit 1
+
+
+
       - name: Initialize CodeQL Packs
         shell: pwsh
         run: |
