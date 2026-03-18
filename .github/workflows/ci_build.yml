@@ -117,7 +117,7 @@ jobs:
           }
           Write-Host "`nExtraction Complete!" -ForegroundColor White
           cd $env:OUTPUT_PATH
-          dir /s
+          tree /f /a
 
       - name: Upload Driver Artifacts
         uses: actions/upload-artifact@v4
