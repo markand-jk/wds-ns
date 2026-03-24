@@ -89,7 +89,7 @@ jobs:
       - name: Build Drivers
         shell: pwsh
         run: |
-          cd '$env:WDS_PATH'
+          cd "$env:WDS_PATH"
           ./Build-AllSamples.ps1 -Configuration Release -Platform x64 -Verbose
 
       - name: Extract Driver Binaries
