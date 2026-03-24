@@ -69,7 +69,8 @@ jobs:
             @("audio", "SdcaVad",           "audio\SoundWire\Samples\SdcaVad\$Platform\$Config\package"),
             @("audio", "AudioCodec",        "audio\Acx\Samples\AudioCodec\Driver\$Platform\$Config\AudioCodec")
           )
-          $env:DRIVER_DATA = ($driverData | ConvertTo-Json -Compress)
+          $json = $driverData | ConvertTo-Json -Compress
+          "DRIVER_DATA=$json" >> $env:GITHUB_ENV
           $driverData | ForEach-Object { $_ }
 
       - name: Read Driver Information JSON
