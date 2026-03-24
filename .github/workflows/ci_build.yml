@@ -23,6 +23,11 @@ jobs:
           path: ${{ env.WDS_PATH }}
           submodules: recursive
 
+      - name: Install Nuget Packages
+          run: |
+            cd "$env:WDS_PATH"
+            nuget restore .\packages.config -PackagesDirectory .\packages\
+
       # - name: Download and Extract CodeQL CLI
       #   shell: pwsh
       #   run: |
