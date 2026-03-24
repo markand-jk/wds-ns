@@ -16,141 +16,153 @@ jobs:
       OUTPUT_PATH: "${{ github.workspace }}\\extracted_drivers"
 
     steps:
-      - name: Checkout Microsoft Driver Samples
-        uses: actions/checkout@v4
-        with:
-          repository: microsoft/Windows-driver-samples
-          path: ${{ env.WDS_PATH }}
-          submodules: recursive
+      # - name: Checkout Microsoft Driver Samples
+      #   uses: actions/checkout@v4
+      #   with:
+      #     repository: microsoft/Windows-driver-samples
+      #     path: ${{ env.WDS_PATH }}
+      #     submodules: recursive
 
-      - name: Delete Other Drivers (For Now...)
-        shell: pwsh
-        run: |
-          Write-Host "[+] Delete other drivers, except audio"
-          cd "$env:WDS_PATH"
-          Remove-Item "bluetooth" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "filesys" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "general" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "gnss" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "gpio" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "hid" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "input" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "network" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "nfc" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "nfp" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "pofx" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "pos" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "powerlimit" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "print" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "prm" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "sd" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "security" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "sensors" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "serial" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "setup" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "simbatt" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "smartcrd" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "spb" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "storage" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "thermal" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "tools" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "TrEE" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "usb" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "video" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "wia" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "wmi" -Recurse -Force -ErrorAction SilentlyContinue
-
-      - name: Download and Extract CodeQL CLI
-        shell: pwsh
-        run: |
-          $CodeqlZip = "codeql-win64.zip"
-          $DownloadUrl = "https://github.com/github/codeql-cli-binaries/releases/download/v2.15.4/codeql-win64.zip"
-
-          Write-Host "[+] Downloading CodeQL CLI v2.15.4..."
-          curl.exe -L -o $CodeqlZip $DownloadUrl
-
-          Write-Host "[+] Extracting CodeQL..."
-          # tar is built-in to Windows Server 2022
-          tar.exe -xf $CodeqlZip
-
-          Write-Host "[+] Cleaning up zip..."
-          Remove-Item $CodeqlZip
-
-          Write-Host "[+] Verifying CodeQL installation..."
-          & $env:CODEQL_BIN --version
-
-      - name: Install Nuget Packages
-        run: |
-          cd "$env:WDS_PATH"
-          nuget restore .\packages.config -PackagesDirectory .\packages\
-          dir
-
-      - name: Initialize CodeQL Packs
-        shell: pwsh
-        run: |
-          Write-Host "[+] Download Pack microsoft/windows-drivers@1.0.13..."
-          & $env:CODEQL_BIN pack download microsoft/windows-drivers@1.0.13
-
-          Write-Host "[+] Download Pack codeql/cpp-queries@0.9.0..."
-          & $env:CODEQL_BIN pack download codeql/cpp-queries@0.9.0
-
-      - name: Creating CodeQL Database & Build Drivers
-        shell: pwsh
-        run: |
-          Write-Host "[+] Creating CodeQL Database..."
-
-          # Use & (call operator) with $env: variables
-          & $env:CODEQL_BIN database create "$env:X64_DB_PATH" `
-              --language=cpp `
-              --command "pwsh -NoProfile -ExecutionPolicy Bypass -Command `"cd '$env:WDS_PATH'; ./Build-AllSamples.ps1 -Configuration Release -Platform x64 -Verbose`""
-
-          if ($LASTEXITCODE -ne 0) {
-              Write-Error "[!] Database creation failed with error $LASTEXITCODE"
-              exit $LASTEXITCODE
-          }
-
-      # - name: Build Drivers
+      # - name: Delete Other Drivers (For Now...)
       #   shell: pwsh
       #   run: |
+      #     Write-Host "[+] Delete other drivers, except audio"
       #     cd "$env:WDS_PATH"
-      #     ./Build-AllSamples.ps1 -Configuration Release -Platform x64 -Verbose
+      #     Remove-Item "bluetooth" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "filesys" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "general" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "gnss" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "gpio" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "hid" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "input" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "network" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "nfc" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "nfp" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "pofx" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "pos" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "powerlimit" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "print" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "prm" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "sd" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "security" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "sensors" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "serial" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "setup" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "simbatt" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "smartcrd" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "spb" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "storage" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "thermal" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "tools" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "TrEE" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "usb" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "video" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "wia" -Recurse -Force -ErrorAction SilentlyContinue
+      #     Remove-Item "wmi" -Recurse -Force -ErrorAction SilentlyContinue
 
-      - name: Extract Driver Binaries
+      - name: Create Driver Information JSON
         shell: pwsh
         run: |
-          $Platform = "x64"
-          $Config   = "Release"
-
           $driverData = @(
-              @("audio", "simpleaudiosample", "audio\simpleaudiosample\$Platform\$Config\package"),
-              @("audio", "sysvad",            "audio\sysvad\$Platform\$Config\package"),
-              @("audio", "SdcaVad",           "audio\SoundWire\Samples\SdcaVad\$Platform\$Config\package"),
-              @("audio", "AudioCodec",        "audio\Acx\Samples\AudioCodec\Driver\$Platform\$Config\AudioCodec")
+            @("audio", "simpleaudiosample", "audio\simpleaudiosample\$Platform\$Config\package"),
+            @("audio", "sysvad",            "audio\sysvad\$Platform\$Config\package"),
+            @("audio", "SdcaVad",           "audio\SoundWire\Samples\SdcaVad\$Platform\$Config\package"),
+            @("audio", "AudioCodec",        "audio\Acx\Samples\AudioCodec\Driver\$Platform\$Config\AudioCodec")
           )
+          $env:DRIVER_DATA = ($driverData | ConvertTo-Json -Compress)
+          $driverData | ForEach-Object { $_ }
 
-          Write-Host "--- Starting Extraction for $Platform-$Config ---" -ForegroundColor Cyan
-          foreach ($entry in $driverData) {
-              $category    = $entry[0]
-              $driverName  = $entry[1]
-              $relativeSrc = $entry[2]
-              $fullSrcPath = Join-Path $env:WDS_PATH $relativeSrc
-              $destFolder = Join-Path $env:OUTPUT_PATH "$category\$driverName\$Platform-$Config"
-              Write-Host "Processing $driverName..." -ForegroundColor Gray
-              if (Test-Path $fullSrcPath) {
-                  if (!(Test-Path $destFolder)) { New-Item -ItemType Directory -Path $destFolder -Force | Out-Null }
-                  Write-Host "  SUCCESS: Copying from $fullSrcPath" -ForegroundColor Green
-                  Copy-Item -Path "$fullSrcPath\*" -Destination $destFolder -Force -Recurse -ErrorAction SilentlyContinue
-              } else {
-                  Write-Host "  X ERROR: Source not found: $fullSrcPath" -ForegroundColor Yellow
-              }
-          }
-          Write-Host "`nExtraction Complete!" -ForegroundColor White
-          cd $env:OUTPUT_PATH
-          tree /f /a
+      - name: Read Driver Information JSON
+        shell: pwsh
+        run: |
+          $driverData = $env:DRIVER_DATA | ConvertFrom-Json
+          $driverData | ForEach-Object { $_ }
 
-      - name: Upload Driver Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: built-drivers-binaries
-          path: ${{ env.OUTPUT_PATH }}
-          if-no-files-found: warn
+      # - name: Download and Extract CodeQL CLI
+      #   shell: pwsh
+      #   run: |
+      #     $CodeqlZip = "codeql-win64.zip"
+      #     $DownloadUrl = "https://github.com/github/codeql-cli-binaries/releases/download/v2.15.4/codeql-win64.zip"
+
+      #     Write-Host "[+] Downloading CodeQL CLI v2.15.4..."
+      #     curl.exe -L -o $CodeqlZip $DownloadUrl
+
+      #     Write-Host "[+] Extracting CodeQL..."
+      #     # tar is built-in to Windows Server 2022
+      #     tar.exe -xf $CodeqlZip
+
+      #     Write-Host "[+] Cleaning up zip..."
+      #     Remove-Item $CodeqlZip
+
+      #     Write-Host "[+] Verifying CodeQL installation..."
+      #     & $env:CODEQL_BIN --version
+
+      # - name: Install Nuget Packages
+      #   run: |
+      #     cd "$env:WDS_PATH"
+      #     nuget restore .\packages.config -PackagesDirectory .\packages\
+      #     dir
+
+      # - name: Initialize CodeQL Packs
+      #   shell: pwsh
+      #   run: |
+      #     Write-Host "[+] Download Pack microsoft/windows-drivers@1.0.13..."
+      #     & $env:CODEQL_BIN pack download microsoft/windows-drivers@1.0.13
+
+      #     Write-Host "[+] Download Pack codeql/cpp-queries@0.9.0..."
+      #     & $env:CODEQL_BIN pack download codeql/cpp-queries@0.9.0
+
+      # - name: Creating CodeQL Database & Build Drivers
+      #   shell: pwsh
+      #   run: |
+      #     Write-Host "[+] Creating CodeQL Database..."
+
+      #     # Use & (call operator) with $env: variables
+      #     & $env:CODEQL_BIN database create "$env:X64_DB_PATH" `
+      #         --language=cpp `
+      #         --command "pwsh -NoProfile -ExecutionPolicy Bypass -Command `"cd '$env:WDS_PATH'; ./Build-AllSamples.ps1 -Configuration Release -Platform x64 -Verbose`""
+
+      #     if ($LASTEXITCODE -ne 0) {
+      #         Write-Error "[!] Database creation failed with error $LASTEXITCODE"
+      #         exit $LASTEXITCODE
+      #     }
+
+      # - name: Extract Driver Binaries
+      #   shell: pwsh
+      #   run: |
+      #     $Platform = "x64"
+      #     $Config   = "Release"
+
+      #     $driverData = @(
+      #         @("audio", "simpleaudiosample", "audio\simpleaudiosample\$Platform\$Config\package"),
+      #         @("audio", "sysvad",            "audio\sysvad\$Platform\$Config\package"),
+      #         @("audio", "SdcaVad",           "audio\SoundWire\Samples\SdcaVad\$Platform\$Config\package"),
+      #         @("audio", "AudioCodec",        "audio\Acx\Samples\AudioCodec\Driver\$Platform\$Config\AudioCodec")
+      #     )
+
+      #     Write-Host "--- Starting Extraction for $Platform-$Config ---" -ForegroundColor Cyan
+      #     foreach ($entry in $driverData) {
+      #         $category    = $entry[0]
+      #         $driverName  = $entry[1]
+      #         $relativeSrc = $entry[2]
+      #         $fullSrcPath = Join-Path $env:WDS_PATH $relativeSrc
+      #         $destFolder = Join-Path $env:OUTPUT_PATH "$category\$driverName\$Platform-$Config"
+      #         Write-Host "Processing $driverName..." -ForegroundColor Gray
+      #         if (Test-Path $fullSrcPath) {
+      #             if (!(Test-Path $destFolder)) { New-Item -ItemType Directory -Path $destFolder -Force | Out-Null }
+      #             Write-Host "  SUCCESS: Copying from $fullSrcPath" -ForegroundColor Green
+      #             Copy-Item -Path "$fullSrcPath\*" -Destination $destFolder -Force -Recurse -ErrorAction SilentlyContinue
+      #         } else {
+      #             Write-Host "  X ERROR: Source not found: $fullSrcPath" -ForegroundColor Yellow
+      #         }
+      #     }
+      #     Write-Host "`nExtraction Complete!" -ForegroundColor White
+      #     cd $env:OUTPUT_PATH
+      #     tree /f /a
+
+      # - name: Upload Driver Artifacts
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: built-drivers-binaries
+      #     path: ${{ env.OUTPUT_PATH }}
+      #     if-no-files-found: warn
