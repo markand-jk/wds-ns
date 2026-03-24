@@ -23,24 +23,24 @@ jobs:
           path: ${{ env.WDS_PATH }}
           submodules: recursive
 
-      - name: Download and Extract CodeQL CLI
-        shell: pwsh
-        run: |
-          $CodeqlZip = "codeql-win64.zip"
-          $DownloadUrl = "https://github.com/github/codeql-cli-binaries/releases/download/v2.15.4/codeql-win64.zip"
+      # - name: Download and Extract CodeQL CLI
+      #   shell: pwsh
+      #   run: |
+      #     $CodeqlZip = "codeql-win64.zip"
+      #     $DownloadUrl = "https://github.com/github/codeql-cli-binaries/releases/download/v2.15.4/codeql-win64.zip"
 
-          Write-Host "[+] Downloading CodeQL CLI v2.15.4..."
-          curl.exe -L -o $CodeqlZip $DownloadUrl
+      #     Write-Host "[+] Downloading CodeQL CLI v2.15.4..."
+      #     curl.exe -L -o $CodeqlZip $DownloadUrl
 
-          Write-Host "[+] Extracting CodeQL..."
-          # tar is built-in to Windows Server 2022
-          tar.exe -xf $CodeqlZip
+      #     Write-Host "[+] Extracting CodeQL..."
+      #     # tar is built-in to Windows Server 2022
+      #     tar.exe -xf $CodeqlZip
 
-          Write-Host "[+] Cleaning up zip..."
-          Remove-Item $CodeqlZip
+      #     Write-Host "[+] Cleaning up zip..."
+      #     Remove-Item $CodeqlZip
 
-          Write-Host "[+] Verifying CodeQL installation..."
-          & $env:CODEQL_BIN --version
+      #     Write-Host "[+] Verifying CodeQL installation..."
+      #     & $env:CODEQL_BIN --version
 
       - name: Delete Other Drivers (For Now...)
         shell: pwsh
@@ -62,29 +62,35 @@ jobs:
           Remove-Item "wia" -Recurse -Force -ErrorAction SilentlyContinue
           Remove-Item "wmi" -Recurse -Force -ErrorAction SilentlyContinue
 
-      - name: Initialize CodeQL Packs
+      # - name: Initialize CodeQL Packs
+      #   shell: pwsh
+      #   run: |
+      #     Write-Host "[+] Download Pack microsoft/windows-drivers@1.0.13..."
+      #     & $env:CODEQL_BIN pack download microsoft/windows-drivers@1.0.13
+
+      #     Write-Host "[+] Download Pack codeql/cpp-queries@0.9.0..."
+      #     & $env:CODEQL_BIN pack download codeql/cpp-queries@0.9.0
+
+      # - name: Creating CodeQL Database & Build Drivers
+      #   shell: pwsh
+      #   run: |
+      #     Write-Host "[+] Creating CodeQL Database..."
+
+      #     # Use & (call operator) with $env: variables
+      #     & $env:CODEQL_BIN database create "$env:X64_DB_PATH" `
+      #         --language=cpp `
+      #         --command "pwsh -NoProfile -ExecutionPolicy Bypass -Command `"cd '$env:WDS_PATH'; ./Build-AllSamples.ps1 -Configuration Release -Platform x64 -Verbose`""
+
+      #     if ($LASTEXITCODE -ne 0) {
+      #         Write-Error "[!] Database creation failed with error $LASTEXITCODE"
+      #         exit $LASTEXITCODE
+      #     }
+
+      - name: Build Drivers
         shell: pwsh
         run: |
-          Write-Host "[+] Download Pack microsoft/windows-drivers@1.0.13..."
-          & $env:CODEQL_BIN pack download microsoft/windows-drivers@1.0.13
-
-          Write-Host "[+] Download Pack codeql/cpp-queries@0.9.0..."
-          & $env:CODEQL_BIN pack download codeql/cpp-queries@0.9.0
-
-      - name: Creating CodeQL Database & Build Drivers
-        shell: pwsh
-        run: |
-          Write-Host "[+] Creating CodeQL Database..."
-
-          # Use & (call operator) with $env: variables
-          & $env:CODEQL_BIN database create "$env:X64_DB_PATH" `
-              --language=cpp `
-              --command "pwsh -NoProfile -ExecutionPolicy Bypass -Command `"cd '$env:WDS_PATH'; ./Build-AllSamples.ps1 -Configuration Release -Platform x64 -Verbose`""
-
-          if ($LASTEXITCODE -ne 0) {
-              Write-Error "[!] Database creation failed with error $LASTEXITCODE"
-              exit $LASTEXITCODE
-          }
+          cd '$env:WDS_PATH'
+          ./Build-AllSamples.ps1 -Configuration Release -Platform x64 -Verbose
 
       - name: Extract Driver Binaries
         shell: pwsh
