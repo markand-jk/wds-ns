@@ -63,6 +63,8 @@ jobs:
       - name: Create Driver Information JSON
         shell: pwsh
         run: |
+          $Platform = "x64"
+          $Config   = "Release"
           $driverData = @(
             @("audio",      "simpleaudiosample",  "audio\simpleaudiosample\$Platform\$Config\package"),
             @("audio",      "sysvad",             "audio\sysvad\$Platform\$Config\package"),
