@@ -73,7 +73,7 @@ jobs:
             @("bluetooth",  "serialhcibus",       "bluetooth\serialhcibus\WDK\$Platform\$Config\SerialBusWdk"),
             @("avstream",   "avscamera",          "avstream\avscamera\$Platform\$Config\package"),
             @("avstream",   "avshws",             "avstream\avshws\$Platform\$Config\avshws"),
-            @("avstream",   "avssamp",            "avstream\avssamp\$Platform\$Config\avssamp"),
+            @("avstream",   "avssamp",            "avstream\avssamp\$Platform\$Config\avssamp")
           )
           $json = $driverData | ConvertTo-Json -Compress
           "DRIVER_DATA=$json" >> $env:GITHUB_ENV
