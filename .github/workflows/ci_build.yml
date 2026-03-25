@@ -128,11 +128,11 @@ jobs:
               exit $LASTEXITCODE
           }
 
-      - name: CodeQL Database Analyze & Generate Sarif
-        shell: pwsh
-        run: |
-          Write-Host "[+] CodeQL Database Analyze..."
-          & $env:CODEQL_BIN database analyze "$env:X64_DB_PATH" C:\codeql-home\Windows-Driver-Developer-Supplemental-Tools\codeql\windows-drivers\suites\windows_driver_mustfix.qls --format=sarifv2.1.0 --output c:\codeql-home\tmp\results-wds.sarif
+      # - name: CodeQL Database Analyze & Generate Sarif
+      #   shell: pwsh
+      #   run: |
+      #     Write-Host "[+] CodeQL Database Analyze..."
+      #     & $env:CODEQL_BIN database analyze "$env:X64_DB_PATH" C:\codeql-home\Windows-Driver-Developer-Supplemental-Tools\codeql\windows-drivers\suites\windows_driver_mustfix.qls --format=sarifv2.1.0 --output c:\codeql-home\tmp\results-wds.sarif
 
       - name: Extract Driver Binaries
         shell: pwsh
