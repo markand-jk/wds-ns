@@ -11,5 +11,6 @@ jobs:
         run: |
           cd c:\workspace
           dir
+          type test.txt
           echo Add other actions to build,
           echo test, and deploy your project.
