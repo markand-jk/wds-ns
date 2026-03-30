@@ -154,6 +154,7 @@ jobs:
               if (Test-Path $fullSrcPath) {
                   if (!(Test-Path $destFolder)) { New-Item -ItemType Directory -Path $destFolder -Force | Out-Null }
                   Write-Host "  SUCCESS: Copying from $fullSrcPath" -ForegroundColor Green
+                  Copy-Item -Path "$fullSrcPath.cer" -Destination "$fullSrcPath" -Force -Recurse -ErrorAction SilentlyContinue
                   Copy-Item -Path "$fullSrcPath\*" -Destination $destFolder -Force -Recurse -ErrorAction SilentlyContinue
               } else {
                   Write-Host "  X ERROR: Source not found: $fullSrcPath" -ForegroundColor Yellow
