@@ -6,3 +6,7 @@ on:
 jobs:
   trigger_build:
     uses: ./.github/workflows/build_ci.yml
+
+  trigger_hlk:
+    needs: trigger_build
+    uses: ./.github/workflows/hlk_ci.yml
