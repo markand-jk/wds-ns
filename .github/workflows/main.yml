@@ -1,0 +1,8 @@
+name: Windows Driver Sample HLK Test (Build + HLK)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  trigger_build:
+    uses: ./.github/workflows/build_ci.yml
