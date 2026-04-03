@@ -1,0 +1,48 @@
+name: HLK Testing
+
+on:
+  workflow_call:
+
+jobs:
+  hlk:
+    runs-on: windows-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - { Name: "Windows10_x86"     }
+          - { Name: "Windows10_x64"     }
+          - { Name: "Win11_22H2_x64"    }
+          - { Name: "Win11_23H2_x64"    }
+          - { Name: "Win11_24H2_x64"    }
+          - { Name: "Win11_25H2_x64"    }
+          - { Name: "Win11_26H1_x64"    }
+          - { Name: "Win11_24H2_arm64"  }
+          - { Name: "Win11_25H2_arm64"  }
+          - { Name: "Win11_26H2_arm64"  }
+
+        category:
+          - Debug
+          - Filesystem
+          - GPIO
+          - IO
+          - Multimedia
+          - Driver-Audio-SimpleAudioSample
+          - Network
+          - PCI
+          - Platform
+          - Power
+          - Security
+          - Sensors
+          - Storage
+          - Tool
+          - USB
+          - Wireless
+
+    steps:
+      - name: Show current matrix
+        shell: pwsh
+        run: |
+          echo "HLK Platform:  ${{ matrix.platform.Name }}"
+          echo "Driver Category: ${{ matrix.category }}"
