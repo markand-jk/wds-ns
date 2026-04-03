@@ -1,0 +1,40 @@
+name: Build Drivers
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+    strategy:
+      matrix:
+        arch: [ "x64", "ARM64" ]
+        config: [ "Release" ]
+
+    steps:
+      - name: Build Step 1
+        run: |
+          Write-Host "[+] Build Step 1...."
+
+      - name: Build Driver
+        shell: pwsh
+        run: |
+          $arch = "${{ matrix.arch }}"
+          $config = "${{ matrix.config }}"
+          Write-Host "Building driver for $arch / $config"
+
+      - name: Package Driver
+        shell: pwsh
+        run: |
+          $arch = "${{ matrix.arch }}"
+          $config = "${{ matrix.config }}"
+          $out = "build_output/$arch-$config"
+          Write-Host "Pkg driver for $arch / $config"
+          Write-Host "Copy driver to $out"
+
+      - name: Upload artifacts
+        shell: pwsh
+        run: |
+          $arch = "${{ matrix.arch }}"
+          Write-Host "Uploading $arch driver...."
