@@ -9,6 +9,17 @@ on:
 
 jobs:
   hlk:
+
+    steps:
+      - name: HLK test Step 1
+        run: |
+          Write-Host "[+] Build Step 1...."
+
+      - name: Echo input values
+        # shell: pwsh
+        run: |
+          echo "Driver Category: ${{ matrix.category }}"
+
     # runs-on: WIN-0041HNNOHA7
 
     # strategy:
@@ -44,15 +55,6 @@ jobs:
     #       - USB
     #       - Wireless
 
-    steps:
-      - name: HLK test Step 1
-        run: |
-          Write-Host "[+] Build Step 1...."
-
-      - name: Echo input values
-        # shell: pwsh
-        run: |
-          echo "Driver Category: ${{ matrix.category }}"
 
       # - name: Show current matrix
       #   shell: pwsh
