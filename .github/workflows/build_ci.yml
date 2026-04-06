@@ -66,42 +66,55 @@ jobs:
           Remove-Item "wia" -Recurse -Force -ErrorAction SilentlyContinue
           Remove-Item "wmi" -Recurse -Force -ErrorAction SilentlyContinue
 
-      # - name: List all files in workspace
-      #   shell: pwsh
-      #   run: |
-      #     Write-Host "📂 Listing all files under: $Env:GITHUB_WORKSPACE"
-      #     Get-ChildItem -Path $Env:GITHUB_WORKSPACE -Recurse -Force
+      - name: List all files in workspace
+        shell: pwsh
+        run: |
+          Write-Host "📂 Listing all files under: $Env:GITHUB_WORKSPACE"
+          Get-ChildItem -Path $Env:GITHUB_WORKSPACE
 
       - name: Export JSON as env var
         shell: pwsh
         run: |
           $jsonPath = Join-Path $Env:GITHUB_WORKSPACE "driver-data.json"
           Write-Host "Reading JSON from: $jsonPath"
-          $json = Get-Content $jsonPath -Raw | ConvertFrom-Json
 
           $Platform = "${{ inputs.arch }}"
           $Config   = "${{ inputs.config }}"
 
+        # $json = Get-Content $jsonPath -Raw | ConvertFrom-Json
+          $json = Get-Content $jsonPath -Raw
           $json = $ExecutionContext.InvokeCommand.ExpandString($json)
-          # $driverData = $json | ConvertFrom-Json
+          $driverData = $json | ConvertFrom-Json
           # "DRIVER_DATA=$driverData" >> $env:GITHUB_ENV
-          "DRIVER_DATA=$json" >> $env:GITHUB_ENV
+      #     "DRIVER_DATA=$json" >> $env:GITHUB_ENV
           $driverData | ForEach-Object { $_ }
 
 
-      - name: Extract Driver Binaries
-        shell: pwsh
-        run: |
-          $driverData = $env:DRIVER_DATA | ConvertFrom-Json
-          foreach ($d in $driverData) {
-              Write-Host "Driver: $($d.Driver)"
-              Write-Host "Path:   $($d.Path)"
-              Write-Host ""
-          }
+          # #$json = $driverData | ConvertTo-Json -Compress
+          # "DRIVER_DATA=$json" >> $env:GITHUB_ENV
+          # $driverData | ForEach-Object { $_ }
 
 
-      - name: Echo input values
-        shell: pwsh
-        run: |
-          Write-Host "Arch: ${{ inputs.arch }}"
-          Write-Host "Config: ${{ inputs.config }}"
+      #     $json = $ExecutionContext.InvokeCommand.ExpandString($json)
+      #     # $driverData = $json | ConvertFrom-Json
+      #     # "DRIVER_DATA=$driverData" >> $env:GITHUB_ENV
+      #     "DRIVER_DATA=$json" >> $env:GITHUB_ENV
+      #     $driverData | ForEach-Object { $_ }
+
+
+      # - name: Extract Driver Binaries
+      #   shell: pwsh
+      #   run: |
+      #     $driverData = $env:DRIVER_DATA | ConvertFrom-Json
+      #     foreach ($d in $driverData) {
+      #         Write-Host "Driver: $($d.Driver)"
+      #         Write-Host "Path:   $($d.Path)"
+      #         Write-Host ""
+      #     }
+
+
+      # - name: Echo input values
+      #   shell: pwsh
+      #   run: |
+      #     Write-Host "Arch: ${{ inputs.arch }}"
+      #     Write-Host "Config: ${{ inputs.config }}"
