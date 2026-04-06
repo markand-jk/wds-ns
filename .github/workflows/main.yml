@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-samples:
     runs-on: windows-2022
 
     strategy:
@@ -18,6 +18,35 @@ jobs:
         with:
           arch: ${{ matrix.arch }}
           config: ${{ matrix.config }}
+
+  hlk-test
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        category:
+          - Debug
+          - Filesystem
+          - GPIO
+          - IO
+          - Multimedia
+          - Network
+          - PCI
+          - Platform
+          - Power
+          - Security
+          - Sensors
+          - Storage
+          - Tool
+          - USB
+          - Wireless
+
+    steps:
+      - name: HLK Testing
+        uses: ./.github/workflows/hlk_ci.yml
+        with:
+          category: ${{ matrix.category }}
+
 
   # trigger_build:
   #   uses: ./.github/workflows/build_ci.yml
