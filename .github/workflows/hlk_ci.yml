@@ -11,11 +11,11 @@ jobs:
   hlk:
     steps:
       - name: HLK test Step 1
+        shell: pwsh
         run: |
           Write-Host "[+] Build Step 1...."
 
       - name: Echo input values
-        # shell: pwsh
         run: |
           echo "Driver Category: ${{ inputs.category }}"
 
