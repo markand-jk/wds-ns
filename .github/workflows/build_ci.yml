@@ -77,14 +77,17 @@ jobs:
           $json = Get-Content $jsonPath -Raw
           $json = $ExecutionContext.InvokeCommand.ExpandString($json)
           $driverData = $json | ConvertFrom-Json
+          $driverJson = $driverData | ConvertTo-Json -Depth 10
 
-          $driverData | ForEach-Object { $_ }
+          Add-Content $Env:GITHUB_ENV "DRIVER_DATA<<EOF"
+          Add-Content $Env:GITHUB_ENV $driverJson
+          Add-Content $Env:GITHUB_ENV "EOF"
 
-
-          "DRIVER_DATA=$json" >> $env:GITHUB_ENV
 
       - name: Download and Extract CodeQL CLI
         shell: pwsh
         run: |
-          $driverData = $env:DRIVER_DATA | ConvertFrom-Json
+          $json = $Env:DRIVER_DATA
+          $driverData = $json | ConvertFrom-Json
+
           $driverData | ForEach-Object { $_ }
