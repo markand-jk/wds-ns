@@ -70,7 +70,7 @@ jobs:
         shell: pwsh
         run: |
           Write-Host "📂 Listing all files under: $Env:GITHUB_WORKSPACE"
-          Get-ChildItem -Path $Env:GITHUB_WORKSPACE
+          Get-ChildItem -Path $Env:GITHUB_WORKSPACE -Recurse -Force
 
       - name: Export JSON as env var
         shell: pwsh
