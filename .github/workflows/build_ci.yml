@@ -102,10 +102,10 @@ jobs:
       #     Write-Host "[+] Verifying CodeQL installation..."
       #     & $env:CODEQL_BIN --version
 
-      - name: Install Nuget Packages
-        run: |
-          cd "$env:WDS_PATH"
-          nuget restore .\packages.config -PackagesDirectory .\packages\
+      # - name: Install Nuget Packages
+      #   run: |
+      #     cd "$env:WDS_PATH"
+      #     nuget restore .\packages.config -PackagesDirectory .\packages\
       #     dir
 
       # - name: Initialize CodeQL Packs
@@ -148,7 +148,10 @@ jobs:
       #     }
 
       - name: Build Drivers
-        run: ./Build-AllSamples.ps1 -Configuration ${{ env.CONFIG }} -Platform ${{ env.PLATFORM }} -Verbose
+        shell: pwsh
+        run: |
+          cd "$env:WDS_PATH"
+          ./Build-AllSamples.ps1 -Configuration ${{ env.CONFIG }} -Platform ${{ env.PLATFORM }} -Verbose
         # env:
         #   WDS_Configuration: ${{ matrix.configuration }}
         #   WDS_Platform: ${{ matrix.platform }}
