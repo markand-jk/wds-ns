@@ -13,8 +13,8 @@ jobs:
 
     env:
       WDS_PATH: "${{ github.workspace }}\\windows-driver-samples"
-      Platform: "${{ inputs.platform }}"
-      Config: "Release"
+      PLATFORM: "${{ inputs.platform }}"
+      CONFIG: "RELEASE"
 
     steps:
       - name: Checkout NS
@@ -67,6 +67,9 @@ jobs:
       - name: Load Driver Data JSON
         shell: pwsh
         run: |
+          $Platform = "${{ env.PLATFORM }}"
+          $Config   = "${{ env.CONFIG }}"
+
           $jsonPath = Join-Path $Env:GITHUB_WORKSPACE "driver-data.json"
           Write-Host "Reading JSON from: $jsonPath"
           Write-Host ">>$Platform, $Config"
