@@ -19,7 +19,7 @@ jobs:
           arch: ${{ matrix.arch }}
           config: ${{ matrix.config }}
 
-  hlk-test
+  hlk-test:
     runs-on: self-hosted
 
     strategy:
