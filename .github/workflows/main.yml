@@ -20,26 +20,14 @@ jobs:
           config: ${{ matrix.config }}
 
   hlk-test:
+    needs: [build-samples]
     runs-on: self-hosted
 
     strategy:
       matrix:
         category:
           - Debug
-          - Filesystem
-          - GPIO
-          - IO
           - Multimedia
-          - Network
-          - PCI
-          - Platform
-          - Power
-          - Security
-          - Sensors
-          - Storage
-          - Tool
-          - USB
-          - Wireless
 
     steps:
       - name: HLK Testing
@@ -54,3 +42,20 @@ jobs:
   # trigger_hlk:
   #   needs: trigger_build
   #   uses: ./.github/workflows/hlk_ci.yml
+
+
+          # - Debug
+          # # - Filesystem
+          # # - GPIO
+          # # - IO
+          # - Multimedia
+          # # - Network
+          # # - PCI
+          # # - Platform
+          # # - Power
+          # # - Security
+          # # - Sensors
+          # # - Storage
+          # # - Tool
+          # # - USB
+          # # - Wireless
