@@ -11,11 +11,9 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        arch: [ "x64", "ARM64" ]
-        config: [ "Release" ]
+        platform: [ "x64", "ARM64" ]
     with:
-      arch: ${{ matrix.arch }}
-      config: ${{ matrix.config }}
+      platform: ${{ matrix.arch }}
     secrets: inherit
 
 
