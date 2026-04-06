@@ -15,11 +15,78 @@ jobs:
   build:
     runs-on: windows-2022
 
+    env:
+      WDS_PATH: "${{ github.workspace }}\\windows-driver-samples"
+
     steps:
-      - name: Build Step 1
+      - name: Checkout Microsoft Driver Samples
+        uses: actions/checkout@v4
+        with:
+          repository: microsoft/Windows-driver-samples
+          path: ${{ env.WDS_PATH }}
+          submodules: recursive
+
+      - name: Delete Other Drivers (For Now...)
         shell: pwsh
         run: |
-          Write-Host "[+] Build Step 1...."
+          Write-Host "[+] Delete other drivers, except multimedia drivers"
+          cd "$env:WDS_PATH"
+          #Remove-Item "bluetooth" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "filesys" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "general" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "gnss" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "gpio" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "hid" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "input" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "network" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "nfc" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "nfp" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "pofx" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "pos" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "powerlimit" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "print" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "prm" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "sd" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "security" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "sensors" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "serial" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "setup" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "simbatt" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "smartcrd" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "spb" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "storage" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "thermal" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "tools" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "TrEE" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "usb" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "video" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "wia" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "wmi" -Recurse -Force -ErrorAction SilentlyContinue
+
+      - name: Export JSON as env var
+        shell: pwsh
+        run: |
+          $jsonPath = Join-Path $Env:GITHUB_WORKSPACE "driver-data.json"
+          Write-Host "Reading JSON from: $jsonPath"
+          $json = Get-Content $jsonPath -Raw | ConvertFrom-Json
+
+          $Platform = ${{ inputs.arch }}
+          $Config   = ${{ inputs.config }}
+
+          $json = $ExecutionContext.InvokeCommand.ExpandString($json)
+          $driverData = $json | ConvertFrom-Json
+          "DRIVER_DATA=$driverData" >> $env:GITHUB_ENV
+
+      - name: Extract Driver Binaries
+        shell: pwsh
+        run: |
+          $driverData = $env:DRIVER_DATA | ConvertFrom-Json
+          foreach ($d in $driverData) {
+              Write-Host "Driver: $($d.Driver)"
+              Write-Host "Path:   $($d.Path)"
+              Write-Host ""
+          }
+
 
       - name: Echo input values
         shell: pwsh
