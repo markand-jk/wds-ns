@@ -66,11 +66,11 @@ jobs:
           Remove-Item "wia" -Recurse -Force -ErrorAction SilentlyContinue
           Remove-Item "wmi" -Recurse -Force -ErrorAction SilentlyContinue
 
-      - name: List all files in workspace
-        shell: pwsh
-        run: |
-          Write-Host "📂 Listing all files under: $Env:GITHUB_WORKSPACE"
-          Get-ChildItem -Path $Env:GITHUB_WORKSPACE -Recurse -Force
+      # - name: List all files in workspace
+      #   shell: pwsh
+      #   run: |
+      #     Write-Host "📂 Listing all files under: $Env:GITHUB_WORKSPACE"
+      #     Get-ChildItem -Path $Env:GITHUB_WORKSPACE -Recurse -Force
 
       - name: Export JSON as env var
         shell: pwsh
@@ -83,8 +83,11 @@ jobs:
           $Config   = "${{ inputs.config }}"
 
           $json = $ExecutionContext.InvokeCommand.ExpandString($json)
-          $driverData = $json | ConvertFrom-Json
-          "DRIVER_DATA=$driverData" >> $env:GITHUB_ENV
+          # $driverData = $json | ConvertFrom-Json
+          # "DRIVER_DATA=$driverData" >> $env:GITHUB_ENV
+          "DRIVER_DATA=$json" >> $env:GITHUB_ENV
+          $driverData | ForEach-Object { $_ }
+
 
       - name: Extract Driver Binaries
         shell: pwsh
