@@ -2,47 +2,59 @@ name: HLK Testing
 
 on:
   workflow_call:
+    inputs:
+      category:
+        required: true
+        type: string
 
 jobs:
   hlk:
-    runs-on: windows-latest
+    # runs-on: WIN-0041HNNOHA7
 
-    strategy:
-      fail-fast: false
-      matrix:
-        platform:
-          - { Name: "Windows10_x86"     }
-          - { Name: "Windows10_x64"     }
-          - { Name: "Win11_22H2_x64"    }
-          - { Name: "Win11_23H2_x64"    }
-          - { Name: "Win11_24H2_x64"    }
-          - { Name: "Win11_25H2_x64"    }
-          - { Name: "Win11_26H1_x64"    }
-          - { Name: "Win11_24H2_arm64"  }
-          - { Name: "Win11_25H2_arm64"  }
-          - { Name: "Win11_26H2_arm64"  }
+    # strategy:
+    #   fail-fast: false
+    #   matrix:
+    #     platform:
+    #       - { Name: "Windows10_x86"     }
+    #       - { Name: "Windows10_x64"     }
+    #       - { Name: "Win11_22H2_x64"    }
+    #       - { Name: "Win11_23H2_x64"    }
+    #       - { Name: "Win11_24H2_x64"    }
+    #       - { Name: "Win11_25H2_x64"    }
+    #       - { Name: "Win11_26H1_x64"    }
+    #       - { Name: "Win11_24H2_arm64"  }
+    #       - { Name: "Win11_25H2_arm64"  }
+    #       - { Name: "Win11_26H2_arm64"  }
 
-        category:
-          - Debug
-          - Filesystem
-          - GPIO
-          - IO
-          - Multimedia
-          - Driver-Audio-SimpleAudioSample
-          - Network
-          - PCI
-          - Platform
-          - Power
-          - Security
-          - Sensors
-          - Storage
-          - Tool
-          - USB
-          - Wireless
+    #     category:
+    #       - Debug
+    #       - Filesystem
+    #       - GPIO
+    #       - IO
+    #       - Multimedia
+    #       - Driver-Audio-SimpleAudioSample
+    #       - Network
+    #       - PCI
+    #       - Platform
+    #       - Power
+    #       - Security
+    #       - Sensors
+    #       - Storage
+    #       - Tool
+    #       - USB
+    #       - Wireless
 
     steps:
-      - name: Show current matrix
-        shell: pwsh
+      - name: HLK test Step 1
         run: |
-          echo "HLK Platform:  ${{ matrix.platform.Name }}"
+          Write-Host "[+] Build Step 1...."
+
+      - name: Echo input values
+        # shell: pwsh
+        run: |
           echo "Driver Category: ${{ matrix.category }}"
+
+      # - name: Show current matrix
+      #   shell: pwsh
+      #   run: |
+      #     echo "HLK Platform:  ${{ matrix.platform.Name }}"
