@@ -17,7 +17,8 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Build Driver
-        uses: ./.github/workflows/build_ci.yml
+        # uses: ./.github/workflows/build_ci.yml
+        uses: markand-jk/wds-ns/.github/workflows/build_ci.yml
         with:
           arch: ${{ matrix.arch }}
           config: ${{ matrix.config }}
