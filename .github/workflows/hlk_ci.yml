@@ -9,7 +9,6 @@ on:
 
 jobs:
   hlk:
-
     steps:
       - name: HLK test Step 1
         run: |
@@ -18,9 +17,7 @@ jobs:
       - name: Echo input values
         # shell: pwsh
         run: |
-          echo "Driver Category: ${{ matrix.category }}"
-
-    # runs-on: WIN-0041HNNOHA7
+          echo "Driver Category: ${{ inputs.category }}"
 
     # strategy:
     #   fail-fast: false
@@ -36,27 +33,3 @@ jobs:
     #       - { Name: "Win11_24H2_arm64"  }
     #       - { Name: "Win11_25H2_arm64"  }
     #       - { Name: "Win11_26H2_arm64"  }
-
-    #     category:
-    #       - Debug
-    #       - Filesystem
-    #       - GPIO
-    #       - IO
-    #       - Multimedia
-    #       - Driver-Audio-SimpleAudioSample
-    #       - Network
-    #       - PCI
-    #       - Platform
-    #       - Power
-    #       - Security
-    #       - Sensors
-    #       - Storage
-    #       - Tool
-    #       - USB
-    #       - Wireless
-
-
-      # - name: Show current matrix
-      #   shell: pwsh
-      #   run: |
-      #     echo "HLK Platform:  ${{ matrix.platform.Name }}"
