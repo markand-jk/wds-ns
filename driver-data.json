@@ -1,0 +1,852 @@
+[
+    {
+        "Type":  "Multimedia",
+        "DriverCategory":  "audio",
+        "Driver":  "simpleaudiosample",
+        "Path":  "audio\\simpleaudiosample\\$Platform\\$Config\\package",
+        "InfFile":  "SimpleAudioSample.inf",
+        "CertificateFile":  "package.cer",
+        "InstallCmd":  ".\\devcon.exe install SimpleAudioSample.inf Root\\SimpleAudioSample",
+        "VerifyCmd":  ".\\devcon find \"Root\\SimpleAudioSample\""
+    },
+    {
+        "Type":  "Multimedia",
+        "DriverCategory":  "audio",
+        "Driver":  "sysvad",
+        "Path":  "audio\\sysvad\\$Platform\\$Config\\package",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Multimedia",
+        "DriverCategory":  "audio",
+        "Driver":  "SdcaVad",
+        "Path":  "audio\\SoundWire\\Samples\\SdcaVad\\$Platform\\$Config\\package",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Multimedia",
+        "DriverCategory":  "audio",
+        "Driver":  "AudioCodec",
+        "Path":  "audio\\Acx\\Samples\\AudioCodec\\Driver\\$Platform\\$Config\\AudioCodec",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Multimedia",
+        "DriverCategory":  "avstream",
+        "Driver":  "avscamera",
+        "Path":  "avstream\\avscamera\\$Platform\\$Config\\package",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Multimedia",
+        "DriverCategory":  "avstream",
+        "Driver":  "avshws",
+        "Path":  "avstream\\avshws\\$Platform\\$Config\\avshws",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Multimedia",
+        "DriverCategory":  "avstream",
+        "Driver":  "avssamp",
+        "Path":  "avstream\\avssamp\\$Platform\\$Config\\avssamp",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Multimedia",
+        "DriverCategory":  "avstream",
+        "Driver":  "avssamp",
+        "Path":  "avstream\\avssamp\\$Platform\\$Config\\avssamp",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "bluetooth",
+        "Driver":  "bthecho-srv",
+        "Path":  "bluetooth\\bthecho\\bthsrv\\sys\\$Platform\\$Config\\BthEchoSampleSrv",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "bluetooth",
+        "Driver":  "bthecho-cli",
+        "Path":  "bluetooth\\bthecho\\bthcli\\sys\\$Platform\\$Config\\BthEchoSampleCli",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "bluetooth",
+        "Driver":  "serialhcibus",
+        "Path":  "bluetooth\\serialhcibus\\WDK\\$Platform\\$Config\\SerialBusWdk",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "filesys",
+        "Driver":  "\t\tcdfs",
+        "Path":  "\tfilesys\\cdfs\\$Platform\\$Config",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "filesys",
+        "Driver":  "\t\tfastfat",
+        "Path":  "filesys\\cdfs\\$Platform\\$Config",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "filesys\\minifilter",
+        "Driver":  "avscan",
+        "Path":  "filesys\\minifilter\\avscan\\filter\\$Platform\\$Config\\avsscan",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "filesys\\minifilter",
+        "Driver":  "cancelSafe",
+        "Path":  "filesys\\minifilter\\cancelSafe\\$Platform\\$Config\\cancelSafe",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "filesys\\minifilter",
+        "Driver":  "cdo",
+        "Path":  "filesys\\minifilter\\cdo\\$Platform\\$Config\\cdo",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "filesys\\minifilter",
+        "Driver":  "change",
+        "Path":  "filesys\\minifilter\\change\\$Platform\\$Config\\change",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "filesys\\minifilter",
+        "Driver":  "ctx",
+        "Path":  "filesys\\minifilter\\ctx\\$Platform\\$Config\\ctx",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "filesys\\minifilter",
+        "Driver":  "delete",
+        "Path":  "filesys\\minifilter\\delete\\$Platform\\$Config\\delete",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "filesys\\minifilter",
+        "Driver":  "MetadataManager",
+        "Path":  "filesys\\minifilter\\MetadataManager\\$Platform\\$Config\\MetadataManager",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "filesys\\minifilter",
+        "Driver":  "NameChanger",
+        "Path":  "filesys\\minifilter\\NameChanger\\$Platform\\$Config\\NameChanger",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "filesys\\minifilter",
+        "Driver":  "nullFilter",
+        "Path":  "filesys\\minifilter\\nullFilter\\$Platform\\$Config\\nullFilter",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "filesys\\minifilter",
+        "Driver":  "passThrough",
+        "Path":  "filesys\\minifilter\\passThrough\\$Platform\\$Config\\passThrough",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "filesys\\minifilter",
+        "Driver":  "scanner",
+        "Path":  "filesys\\minifilter\\scanner\\$Platform\\$Config\\scanner",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "filesys\\minifilter",
+        "Driver":  "simrep",
+        "Path":  "filesys\\minifilter\\simrep\\$Platform\\$Config\\simrep",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "filesys\\minifilter",
+        "Driver":  "swapBuffers",
+        "Path":  "filesys\\minifilter\\swapBuffers\\$Platform\\$Config\\swapBuffers",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "gnss",
+        "Driver":  "gnssUmdf",
+        "Path":  "gnss\\gnssUmdf\\bin\\$Platform\\$Config\\gnssUmdf",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "gpio\\samples",
+        "Driver":  "simdevicekmdf",
+        "Path":  "gpio\\samples\\simdevice\\kmdf\\$Platform\\$Config\\simdevice",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "gpio\\samples",
+        "Driver":  "simdeviceumdf",
+        "Path":  "gpio\\samples\\simdevice\\umdf\\$Platform\\$Config\\simdeviceumdf",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "gpio\\samples",
+        "Driver":  "simgpio",
+        "Path":  "gpio\\samples\\simgpio\\$Platform\\$Config\\simgpio",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "gpio\\samples",
+        "Driver":  "simgpio_i2c",
+        "Path":  "gpio\\samples\\simgpio_i2c\\$Platform\\$Config\\simgpio_i2c",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "hid",
+        "Driver":  "firefly",
+        "Path":  "hid\\firefly\\driver\\$Platform\\$Config\\firefly",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "hid",
+        "Driver":  "hclient",
+        "Path":  "hid\\hclient\\$Platform\\$Config\\hclient",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "hid",
+        "Driver":  "hidusbfx2",
+        "Path":  "hid\\hidusbfx2\\$Platform\\$Config\\hidusbfx2",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "hid",
+        "Driver":  "vhidmini2",
+        "Path":  "hid\\vhidmini2\\driver\\kmdf\\$Platform\\$Config\\vhidmini",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "hid",
+        "Driver":  "vhidmini2",
+        "Path":  "hid\\vhidmini2\\driver\\umdf2\\$Platform\\$Config\\VhidminiUm",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "input",
+        "Driver":  "kbfilter",
+        "Path":  "input\\kbfilter\\sys\\$Platform\\$Config\\kbfilter",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "input",
+        "Driver":  "layout",
+        "Path":  "input\\layout\\all_kbds\\$Platform\\$Config\\layout",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "input",
+        "Driver":  "moufiltr",
+        "Path":  "input\\moufiltr\\$Platform\\$Config\\moufiltr",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "network",
+        "Driver":  "fakemodem",
+        "Path":  "network\\modem\\fakemodem\\x64\\Release\\fakemodem",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "network",
+        "Driver":  "msforwardext",
+        "Path":  "network\\ndis\\extension\\samples\\forward\\x64\\Release\\msforwardext",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "network",
+        "Driver":  "mspassthroughext",
+        "Path":  "network\\ndis\\extension\\samples\\passthrough\\x64\\Release\\mspassthroughext",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "network",
+        "Driver":  "ndislwf",
+        "Path":  "network\\ndis\\filter\\forward\\x64\\Release\\ndislwf",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "network",
+        "Driver":  "mux",
+        "Path":  "network\\ndis\\mux\\driver\\60\\novlan\\x64\\Release\\mux",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "network",
+        "Driver":  "muxvlan",
+        "Path":  "network\\ndis\\mux\\driver\\60\\vlan\\x64\\Release\\muxvlan",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "network",
+        "Driver":  "ndisprot60",
+        "Path":  "network\\ndis\\ndisprot\\6x\\sys\\60\\x64\\Release\\ndisprot60",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "network",
+        "Driver":  "ndisprot630",
+        "Path":  "network\\ndis\\ndisprot\\6x\\sys\\630\\x64\\Release\\ndisprot630",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "network",
+        "Driver":  "ndisprot_kmdf",
+        "Path":  "network\\ndis\\ndisprot_kmdf\\x64\\Release\\package",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "network",
+        "Driver":  "netvmini60",
+        "Path":  "network\\ndis\\netvmini\\6x\\60\\x64\\Release\\netvmini60",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "network",
+        "Driver":  "netvmini620",
+        "Path":  "network\\ndis\\netvmini\\6x\\620\\x64\\Release\\netvmini620",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "network",
+        "Driver":  "netvmini630",
+        "Path":  "network\\ndis\\netvmini\\6x\\630\\x64\\Release\\netvmini630",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "network",
+        "Driver":  "netvmini680",
+        "Path":  "network\\ndis\\netvmini\\6x\\680\\x64\\Release\\netvmini680",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "network",
+        "Driver":  "ddproxy",
+        "Path":  "network\\trans\\ddproxy\\sys\\x64\\Release\\ddproxy",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "network",
+        "Driver":  "msnmntr",
+        "Path":  "network\\trans\\msnmntr\\sys\\x64\\Release\\msnmntr",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "network",
+        "Driver":  "stmedit",
+        "Path":  "network\\trans\\stmedit\\sys\\x64\\Release\\stmedit",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "network",
+        "Driver":  "WFPSamplerCalloutDriver",
+        "Path":  "network\\trans\\WFPSampler\\sys\\x64\\Release\\WFPSamplerCalloutDriver",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "network",
+        "Driver":  "cxwmbclass",
+        "Path":  "network\\wwan\\cxwmbclass\\x64\\Release\\cxwmbclass",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "nfc",
+        "Driver":  "NfcCxSample",
+        "Path":  "\tnfc\\NfcCxSample\\x64\\Release\\windows-drivertemplate-nfc",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "nfp",
+        "Driver":  "net",
+        "Path":  "nfp\\net\\exe\\x64\\Release",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "pofx",
+        "Driver":  "sampleacpipep",
+        "Path":  "pofx\\PEP\\acpi\\x64\\Release\\sampleacpipep",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "pofx",
+        "Driver":  "SingleComponentSingleStateUm",
+        "Path":  "pofx\\UMDF2\\Driver\\SingleComp\\x64\\Release\\SingleComponentSingleStateUm",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "pofx",
+        "Driver":  "SingleComponentFStateDriver",
+        "Path":  "pofx\\WDF\\Driver\\SingleComp\\x64\\Release\\SingleComponentFStateDriver",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "pofx",
+        "Driver":  "WdfMultiComp",
+        "Path":  "pofx\\WDF\\Driver\\MultiComp\\driver\\x64\\Release\\WdfMultiComp",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "pos",
+        "Driver":  "SampleBarcodeScannerDrv",
+        "Path":  "pos\\drivers\\barcodescanner\\x64\\Release\\SampleBarcodeScannerDrv",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "pos",
+        "Driver":  "SampleMagneticStripeReaderDrv",
+        "Path":  "pos\\drivers\\MagneticStripeReader\\x64\\Release\\SampleMagneticStripeReaderDrv",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "powerlimit",
+        "Driver":  "plclient",
+        "Path":  "powerlimit\\plclient\\x64\\Release\\plclient",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "powerlimit",
+        "Driver":  "plpolicy",
+        "Path":  "powerlimit\\plpolicy\\x64\\Release\\plpolicy",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "prm",
+        "Driver":  "prmfuncsample",
+        "Path":  "prm\\PrmFunc\\x64\\Release\\prmfuncsample",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "sd/miniport",
+        "Driver":  "sdhc",
+        "Path":  "sd\\miniport\\sdhc\\inbox\\x64\\Release\\sdhc",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "security",
+        "Driver":  "elam",
+        "Path":  "security\\elam\\x64\\Release\\elamsample",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "sensors",
+        "Driver":  "Activity",
+        "Path":  "sensors\\Activity\\x64\\Release\\Activity",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "sensors",
+        "Driver":  "ADXL345Acc",
+        "Path":  "sensors\\ADXL345Acc\\x64\\Release\\ADXL345Acc",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "sensors",
+        "Driver":  "CustomSensors",
+        "Path":  "sensors\\CustomSensors\\x64\\Release\\CustomSensors",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "sensors",
+        "Driver":  "Fusion",
+        "Path":  "sensors\\Fusion\\x64\\Release\\Fusion",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "sensors",
+        "Driver":  "Pedometer",
+        "Path":  "sensors\\Pedometer\\x64\\Release\\Pedometer",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "sensors",
+        "Driver":  "SensorsComboDriver",
+        "Path":  "sensors\\SensorsComboDriver\\x64\\Release\\SensorsComboDriver",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "sensors",
+        "Driver":  "SimpleDeviceOrientationSensor",
+        "Path":  "sensors\\SimpleDeviceOrientationSensor\\x64\\Release\\SimpleDeviceOrientationSensor",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "serial",
+        "Driver":  "serenum",
+        "Path":  "serial\\serenum\\x64\\Release\\SerEnum_sample",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "serial",
+        "Driver":  "serial",
+        "Path":  "serial\\serial\\x64\\Release\\wdfserial",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "serial",
+        "Driver":  "VirtualSerial2",
+        "Path":  "serial\\VirtualSerial2\\x64\\Release\\VirtualSerial2um",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "setup",
+        "Driver":  "devcon",
+        "Path":  "setup\\devcon\\x64\\Release",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "simbatt",
+        "Driver":  "func",
+        "Path":  "simbatt\\func\\x64\\Release\\simbatt",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "smartcrd",
+        "Driver":  "Pscr",
+        "Path":  "smartcrd\\pscr\\x64\\Release\\Pscr",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "spb",
+        "Driver":  "SpbTestTool",
+        "Path":  "spb\\SpbTestTool\\sys\\x64\\Release\\SpbTestTool",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    },
+    {
+        "Type":  "Debug",
+        "DriverCategory":  "storage",
+        "Driver":  "lsi_u3",
+        "Path":  "storage\\miniports\\lsi_u3\\src\\x64\\Release\\lsi_u3",
+        "InfFile":  "",
+        "CertificateFile":  "",
+        "InstallCmd":  "",
+        "VerifyCmd":  ""
+    }
+]
