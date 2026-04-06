@@ -102,10 +102,10 @@ jobs:
       #     Write-Host "[+] Verifying CodeQL installation..."
       #     & $env:CODEQL_BIN --version
 
-      # - name: Install Nuget Packages
-      #   run: |
-      #     cd "$env:WDS_PATH"
-      #     nuget restore .\packages.config -PackagesDirectory .\packages\
+      - name: Install Nuget Packages
+        run: |
+          cd "$env:WDS_PATH"
+          nuget restore .\packages.config -PackagesDirectory .\packages\
       #     dir
 
       # - name: Initialize CodeQL Packs
