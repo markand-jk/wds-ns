@@ -13,7 +13,7 @@ jobs:
       matrix:
         platform: [ "x64", "ARM64" ]
     with:
-      platform: ${{ matrix.arch }}
+      platform: ${{ matrix.platform }}
     secrets: inherit
 
 
