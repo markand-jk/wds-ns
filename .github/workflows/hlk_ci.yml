@@ -9,6 +9,7 @@ on:
 
 jobs:
   hlk:
+    runs-on: self-hosted
     steps:
       - name: HLK test Step 1
         shell: pwsh
