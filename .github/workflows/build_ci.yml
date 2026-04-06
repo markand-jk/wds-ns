@@ -2,7 +2,6 @@ name: Build Drivers
 
 on:
   workflow_call:
-
     inputs:
       arch:
         required: true
