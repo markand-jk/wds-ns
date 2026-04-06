@@ -4,9 +4,24 @@ on:
   workflow_dispatch:
 
 jobs:
-  trigger_build:
-    uses: ./.github/workflows/build_ci.yml
+  build:
+    runs-on: windows-2022
 
-  trigger_hlk:
-    needs: trigger_build
-    uses: ./.github/workflows/hlk_ci.yml
+    strategy:
+      matrix:
+        arch: [ "x64", "ARM64" ]
+        config: [ "Release" ]
+
+    steps:
+      - name: Build Driver
+        uses: ./.github/workflows/build_ci.yml
+        with:
+          arch: ${{ matrix.arch }}
+          config: ${{ matrix.config }}
+
+  # trigger_build:
+  #   uses: ./.github/workflows/build_ci.yml
+
+  # trigger_hlk:
+  #   needs: trigger_build
+  #   uses: ./.github/workflows/hlk_ci.yml
