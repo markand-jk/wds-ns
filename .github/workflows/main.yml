@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Build Driver
-        uses: ./.github/workflows/build_ci.yml
+        uses: ${{ github.repository }}/.github/workflows/build_ci.yml@main
         with:
           arch: ${{ matrix.arch }}
           config: ${{ matrix.config }}
@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - name: HLK Testing
-        uses: ./.github/workflows/hlk_ci.yml
+        uses: ${{ github.repository }}/.github/workflows/hlk_ci.yml@main
         with:
           category: ${{ matrix.category }}
 
