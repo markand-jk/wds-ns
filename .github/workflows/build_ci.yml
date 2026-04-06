@@ -79,8 +79,8 @@ jobs:
           Write-Host "Reading JSON from: $jsonPath"
           $json = Get-Content $jsonPath -Raw | ConvertFrom-Json
 
-          $Platform = ${{ inputs.arch }}
-          $Config   = ${{ inputs.config }}
+          $Platform = "${{ inputs.arch }}"
+          $Config   = "${{ inputs.config }}"
 
           $json = $ExecutionContext.InvokeCommand.ExpandString($json)
           $driverData = $json | ConvertFrom-Json
