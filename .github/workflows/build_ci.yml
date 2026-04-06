@@ -53,7 +53,7 @@ jobs:
           Remove-Item "serial" -Recurse -Force -ErrorAction SilentlyContinue
           Remove-Item "setup" -Recurse -Force -ErrorAction SilentlyContinue
           Remove-Item "simbatt" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Itedm "smartcrd" -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item "smartcrd" -Recurse -Force -ErrorAction SilentlyContinue
           Remove-Item "spb" -Recurse -Force -ErrorAction SilentlyContinue
           Remove-Item "storage" -Recurse -Force -ErrorAction SilentlyContinue
           Remove-Item "thermal" -Recurse -Force -ErrorAction SilentlyContinue
