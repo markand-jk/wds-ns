@@ -1,68 +1,29 @@
+
 name: Windows Driver Sample HLK Test (Build + HLK)
 
 on:
   workflow_dispatch:
 
 jobs:
-  build-samples:
-    runs-on: windows-2022
 
+  build-samples:
+    uses: markand-jk/wds-ns/.github/workflows/build_ci.yml@main
     strategy:
       matrix:
         arch: [ "x64", "ARM64" ]
         config: [ "Release" ]
+    with:
+      arch: ${{ matrix.arch }}
+      config: ${{ matrix.config }}
+    secrets: inherit
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Build Driver
-        # uses: ./.github/workflows/build_ci.yml
-        uses: markand-jk/wds-ns/.github/workflows/build_ci.yml@main
-        with:
-          arch: ${{ matrix.arch }}
-          config: ${{ matrix.config }}
 
   hlk-test:
-    needs: [build-samples]
-    runs-on: self-hosted
-
+    needs: build-samples
+    uses: markand-jk/wds-ns/.github/workflows/hlk_ci.yml@main
     strategy:
       matrix:
-        category:
-          - Debug
-          - Multimedia
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: HLK Testing
-        uses: ./.github/workflows/hlk_ci.yml
-        with:
-          category: ${{ matrix.category }}
-
-
-  # trigger_build:
-  #   uses: ./.github/workflows/build_ci.yml
-
-  # trigger_hlk:
-  #   needs: trigger_build
-  #   uses: ./.github/workflows/hlk_ci.yml
-
-
-          # - Debug
-          # # - Filesystem
-          # # - GPIO
-          # # - IO
-          # - Multimedia
-          # # - Network
-          # # - PCI
-          # # - Platform
-          # # - Power
-          # # - Security
-          # # - Sensors
-          # # - Storage
-          # # - Tool
-          # # - USB
-          # # - Wireless
+        category: [ "Debug", "Multimedia" ]
+    with:
+      category: ${{ matrix.category }}
+    secrets: inherit
