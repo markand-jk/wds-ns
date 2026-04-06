@@ -1,4 +1,3 @@
-
 name: Build Drivers
 
 on:
@@ -81,40 +80,7 @@ jobs:
           $Platform = "${{ inputs.arch }}"
           $Config   = "${{ inputs.config }}"
 
-        # $json = Get-Content $jsonPath -Raw | ConvertFrom-Json
           $json = Get-Content $jsonPath -Raw
           $json = $ExecutionContext.InvokeCommand.ExpandString($json)
           $driverData = $json | ConvertFrom-Json
-          # "DRIVER_DATA=$driverData" >> $env:GITHUB_ENV
-      #     "DRIVER_DATA=$json" >> $env:GITHUB_ENV
           $driverData | ForEach-Object { $_ }
-
-
-          # #$json = $driverData | ConvertTo-Json -Compress
-          # "DRIVER_DATA=$json" >> $env:GITHUB_ENV
-          # $driverData | ForEach-Object { $_ }
-
-
-      #     $json = $ExecutionContext.InvokeCommand.ExpandString($json)
-      #     # $driverData = $json | ConvertFrom-Json
-      #     # "DRIVER_DATA=$driverData" >> $env:GITHUB_ENV
-      #     "DRIVER_DATA=$json" >> $env:GITHUB_ENV
-      #     $driverData | ForEach-Object { $_ }
-
-
-      # - name: Extract Driver Binaries
-      #   shell: pwsh
-      #   run: |
-      #     $driverData = $env:DRIVER_DATA | ConvertFrom-Json
-      #     foreach ($d in $driverData) {
-      #         Write-Host "Driver: $($d.Driver)"
-      #         Write-Host "Path:   $($d.Path)"
-      #         Write-Host ""
-      #     }
-
-
-      # - name: Echo input values
-      #   shell: pwsh
-      #   run: |
-      #     Write-Host "Arch: ${{ inputs.arch }}"
-      #     Write-Host "Config: ${{ inputs.config }}"
