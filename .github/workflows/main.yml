@@ -9,6 +9,7 @@ jobs:
   build-samples:
     uses: markand-jk/wds-ns/.github/workflows/build_ci.yml@main
     strategy:
+      max-parallel: 1
       matrix:
         arch: [ "x64", "ARM64" ]
         config: [ "Release" ]
@@ -22,6 +23,7 @@ jobs:
     needs: build-samples
     uses: markand-jk/wds-ns/.github/workflows/hlk_ci.yml@main
     strategy:
+      max-parallel: 5
       matrix:
         category: [ "Debug", "Multimedia" ]
     with:
