@@ -18,7 +18,7 @@ jobs:
 
       - name: Build Driver
         # uses: ./.github/workflows/build_ci.yml
-        uses: markand-jk/wds-ns/.github/workflows/build_ci.yml
+        uses: markand-jk/wds-ns/.github/workflows/build_ci.yml@main
         with:
           arch: ${{ matrix.arch }}
           config: ${{ matrix.config }}
