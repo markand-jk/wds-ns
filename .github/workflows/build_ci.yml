@@ -152,10 +152,10 @@ jobs:
         run: |
           cd "$env:WDS_PATH"
           # dir
-          & ./Build-Samples.ps1 -Configuration "$Env:CONFIG" -Platform "$Env:PLATFORM" -Verbose
+          ./Build-Samples.ps1 -Verbose
         env:
-          WDS_Configuration: ${{ matrix.configuration }}
-          WDS_Platform: ${{ matrix.platform }}
+          WDS_Configuration: ${{ Env.CONFIG }}
+          WDS_Platform: ${{ Env.PLATFORM }}
         #   WDS_ReportFileName: _overview.${{ matrix.configuration }}.${{ matrix.platform }}
 
       - name: Print Driver Data JSON
