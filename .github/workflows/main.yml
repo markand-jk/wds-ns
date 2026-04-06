@@ -13,8 +13,11 @@ jobs:
         config: [ "Release" ]
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
       - name: Build Driver
-        uses: ${{ github.repository }}/.github/workflows/build_ci.yml@main
+        uses: ./.github/workflows/build_ci.yml
         with:
           arch: ${{ matrix.arch }}
           config: ${{ matrix.config }}
@@ -30,8 +33,11 @@ jobs:
           - Multimedia
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
       - name: HLK Testing
-        uses: ${{ github.repository }}/.github/workflows/hlk_ci.yml@main
+        uses: ./.github/workflows/hlk_ci.yml
         with:
           category: ${{ matrix.category }}
 
