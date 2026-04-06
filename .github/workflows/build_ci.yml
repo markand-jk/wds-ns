@@ -1,3 +1,4 @@
+
 name: Build Drivers
 
 on:
@@ -13,6 +14,7 @@ on:
 jobs:
   build:
     runs-on: windows-2022
+
     steps:
       - name: Build Step 1
         shell: pwsh
@@ -20,6 +22,7 @@ jobs:
           Write-Host "[+] Build Step 1...."
 
       - name: Echo input values
+        shell: pwsh
         run: |
-          echo "Arch: ${{ inputs.arch }}"
-          echo "Config: ${{ inputs.config }}"
+          Write-Host "Arch: ${{ inputs.arch }}"
+          Write-Host "Config: ${{ inputs.config }}"
