@@ -151,7 +151,7 @@ jobs:
         shell: pwsh
         run: |
           cd "$env:WDS_PATH"
-          ./Build-AllSamples.ps1 -Configuration ${{ env.CONFIG }} -Platform ${{ env.PLATFORM }} -Verbose
+          & ./Build-AllSamples.ps1 -Configuration "$Env:CONFIG" -Platform "$Env:PLATFORM" -Verbose
         # env:
         #   WDS_Configuration: ${{ matrix.configuration }}
         #   WDS_Platform: ${{ matrix.platform }}
