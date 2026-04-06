@@ -19,6 +19,9 @@ jobs:
       WDS_PATH: "${{ github.workspace }}\\windows-driver-samples"
 
     steps:
+      - name: Checkout NS
+        uses: actions/checkout@v4
+
       - name: Checkout Microsoft Driver Samples
         uses: actions/checkout@v4
         with:
@@ -68,7 +71,7 @@ jobs:
         run: |
           Write-Host "📂 Listing all files under: $Env:GITHUB_WORKSPACE"
           Get-ChildItem -Path $Env:GITHUB_WORKSPACE -Recurse -Force
-          
+
       - name: Export JSON as env var
         shell: pwsh
         run: |
