@@ -39,37 +39,37 @@ jobs:
         run: |
           Write-Host "[+] Delete other drivers, except multimedia drivers"
           cd "$env:WDS_PATH"
-          Remove-Item "bluetooth" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "filesys" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "general" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "gnss" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "gpio" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "hid" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "input" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "network" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "nfc" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "nfp" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "pofx" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "pos" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "powerlimit" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "print" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "prm" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "sd" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "security" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "sensors" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "serial" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "setup" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "simbatt" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "smartcrd" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "spb" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "storage" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "thermal" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "tools" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "TrEE" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "usb" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "video" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "wia" -Recurse -Force -ErrorAction SilentlyContinue
-          Remove-Item "wmi" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "bluetooth" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "filesys" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "general" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "gnss" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "gpio" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "hid" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "input" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "network" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "nfc" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "nfp" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "pofx" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "pos" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "powerlimit" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "print" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "prm" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "sd" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "security" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "sensors" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "serial" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "setup" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "simbatt" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "smartcrd" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "spb" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "storage" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "thermal" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "tools" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "TrEE" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "usb" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "video" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "wia" -Recurse -Force -ErrorAction SilentlyContinue
+          # Remove-Item "wmi" -Recurse -Force -ErrorAction SilentlyContinue
 
       - name: Load Driver Data JSON
         shell: pwsh
