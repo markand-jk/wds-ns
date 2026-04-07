@@ -165,20 +165,32 @@ jobs:
           $json = $Env:DRIVER_DATA
           $driverData = $json | ConvertFrom-Json
 
-          Write-Host "--- Starting Extraction for ${{ Env.PLATFORM }}-${{ Env.CONFIG }} ---" -ForegroundColor Cyan
+          Write-Host "--- Starting Extraction for ${{ Env.PLATFORM }}-${{ Env.CONFIG }} ---"
 
-          foreach ($d in $driverData) {
-              Write-Host "Driver: $($d.Type)"
-              Write-Host "Driver: $($d.DriverCategory)"
-              Write-Host "Driver: $($d.Driver)"
-              Write-Host "Driver: $($d.Path)"
-              Write-Host ""
+          foreach ($driver in $driverData) {
+            $category    = $($driver.DriverCategory)
+            $driverName  = $($driver.Driver)
+            $relativeSrc = $($driver.Path)
+            $fullSrcPath = Join-Path $env:WDS_PATH $relativeSrc
+            $destFolder = Join-Path $env:OUTPUT_PATH "${{ Env.PLATFORM }}-${{ Env.CONFIG }}\$category\$driverName"
+            Write-Host "Processing $driverName..."
+            Write-Host "Copy from $fullSrcPath =>>> $destFolder"
+
+            if (Test-Path $fullSrcPath) {
+                if (!(Test-Path $destFolder)) { New-Item -ItemType Directory -Path $destFolder -Force | Out-Null }
+                Write-Host "  SUCCESS: Copying from $fullSrcPath"
+                # Copy-Item -Path "$fullSrcPath.cer" -Destination "$fullSrcPath" -Force -Recurse -ErrorAction SilentlyContinue
+                # Copy-Item -Path "$fullSrcPath\*" -Destination $destFolder -Force -Recurse -ErrorAction SilentlyContinue
+            } else {
+                Write-Host "  X ERROR: Source not found: $fullSrcPath"
+            }
+
           }
 
-      #     foreach ($entry in $driverData) {
-      #         $category    = $entry[1]
-      #         $driverName  = $entry[2]
-      #         $relativeSrc = $entry[3]
+      #     foreach ($driver in $driverData) {
+      #         $category    = $($driver.DriverCategory)
+      #         $driverName  = $($driver.Driver)
+      #         $relativeSrc = $($driver.Path)
       #         $fullSrcPath = Join-Path $env:WDS_PATH $relativeSrc
       #         $destFolder = Join-Path $env:OUTPUT_PATH "${{ Env.PLATFORM }}-${{ Env.CONFIG }}\$category\$driverName"
       #         Write-Host "Processing $driverName..." -ForegroundColor Gray
