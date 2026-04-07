@@ -148,16 +148,16 @@ jobs:
       #         exit $LASTEXITCODE
       #     }
 
-      - name: Build Drivers
-        shell: pwsh
-        run: |
-          cd "$env:WDS_PATH"
-          # dir
-          ./Build-Samples.ps1 -Verbose
-        env:
-          WDS_Configuration: ${{ Env.CONFIG }}
-          WDS_Platform: ${{ Env.PLATFORM }}
-        #   WDS_ReportFileName: _overview.${{ matrix.configuration }}.${{ matrix.platform }}
+      # - name: Build Drivers
+      #   shell: pwsh
+      #   run: |
+      #     cd "$env:WDS_PATH"
+      #     # dir
+      #     ./Build-Samples.ps1 -Verbose
+      #   env:
+      #     WDS_Configuration: ${{ Env.CONFIG }}
+      #     WDS_Platform: ${{ Env.PLATFORM }}
+      #   #   WDS_ReportFileName: _overview.${{ matrix.configuration }}.${{ matrix.platform }}
 
       - name: Extract Driver Binaries
         shell: pwsh
@@ -166,37 +166,46 @@ jobs:
           $driverData = $json | ConvertFrom-Json
 
           Write-Host "--- Starting Extraction for ${{ Env.PLATFORM }}-${{ Env.CONFIG }} ---" -ForegroundColor Cyan
-          foreach ($entry in $driverData) {
-              $category    = $entry[1]
-              $driverName  = $entry[2]
-              $relativeSrc = $entry[3]
-              $fullSrcPath = Join-Path $env:WDS_PATH $relativeSrc
-              $destFolder = Join-Path $env:OUTPUT_PATH "${{ Env.PLATFORM }}-${{ Env.CONFIG }}\$category\$driverName"
-              Write-Host "Processing $driverName..." -ForegroundColor Gray
-              if (Test-Path $fullSrcPath) {
-                  if (!(Test-Path $destFolder)) { New-Item -ItemType Directory -Path $destFolder -Force | Out-Null }
-                  Write-Host "  SUCCESS: Copying from $fullSrcPath" -ForegroundColor Green
-                  Copy-Item -Path "$fullSrcPath.cer" -Destination "$fullSrcPath" -Force -Recurse -ErrorAction SilentlyContinue
-                  Copy-Item -Path "$fullSrcPath\*" -Destination $destFolder -Force -Recurse -ErrorAction SilentlyContinue
-              } else {
-                  Write-Host "  X ERROR: Source not found: $fullSrcPath" -ForegroundColor Yellow
-              }
+
+          foreach ($d in $driverData) {
+              Write-Host "Driver: $($d.Type)"
+              Write-Host "Driver: $($d.DriverCategory)"
+              Write-Host "Driver: $($d.Driver)"
+              Write-Host "Driver: $($d.Path)"
+              Write-Host ""
           }
-          Write-Host "`nExtraction Complete!" -ForegroundColor White
-          cd $env:OUTPUT_PATH
-          tree /f /a
 
-      - name: Upload Driver Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: built-drivers-binaries
-          path: ${{ env.OUTPUT_PATH }}
-          if-no-files-found: warn
+      #     foreach ($entry in $driverData) {
+      #         $category    = $entry[1]
+      #         $driverName  = $entry[2]
+      #         $relativeSrc = $entry[3]
+      #         $fullSrcPath = Join-Path $env:WDS_PATH $relativeSrc
+      #         $destFolder = Join-Path $env:OUTPUT_PATH "${{ Env.PLATFORM }}-${{ Env.CONFIG }}\$category\$driverName"
+      #         Write-Host "Processing $driverName..." -ForegroundColor Gray
+      #         if (Test-Path $fullSrcPath) {
+      #             if (!(Test-Path $destFolder)) { New-Item -ItemType Directory -Path $destFolder -Force | Out-Null }
+      #             Write-Host "  SUCCESS: Copying from $fullSrcPath" -ForegroundColor Green
+      #             Copy-Item -Path "$fullSrcPath.cer" -Destination "$fullSrcPath" -Force -Recurse -ErrorAction SilentlyContinue
+      #             Copy-Item -Path "$fullSrcPath\*" -Destination $destFolder -Force -Recurse -ErrorAction SilentlyContinue
+      #         } else {
+      #             Write-Host "  X ERROR: Source not found: $fullSrcPath" -ForegroundColor Yellow
+      #         }
+      #     }
+      #     Write-Host "`nExtraction Complete!" -ForegroundColor White
+      #     cd $env:OUTPUT_PATH
+      #     tree /f /a
 
-      - name: Print Driver Data JSON
-        shell: pwsh
-        run: |
-          $json = $Env:DRIVER_DATA
-          $driverData = $json | ConvertFrom-Json
+      # - name: Upload Driver Artifacts
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: built-drivers-binaries
+      #     path: ${{ env.OUTPUT_PATH }}
+      #     if-no-files-found: warn
 
-          $driverData | ForEach-Object { $_ }
+      # - name: Print Driver Data JSON
+      #   shell: pwsh
+      #   run: |
+      #     $json = $Env:DRIVER_DATA
+      #     $driverData = $json | ConvertFrom-Json
+
+      #     $driverData | ForEach-Object { $_ }
