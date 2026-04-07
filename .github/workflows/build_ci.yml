@@ -188,14 +188,14 @@ jobs:
                 Write-Host "  X ERROR: Source not found: $fullSrcPath"
             }
           }
-          cd $env:OUTPUT_PATH
+          cd $Env:OUTPUT_PATH
           tree /f /a
 
       - name: Upload Driver Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: built-drivers-binaries
-          path: ${{ env.OUTPUT_PATH }}
+          name: built-drivers-binaries-${{ Env.PLATFORM }}-${{ github.run_id }}
+          path: ${{ Env.OUTPUT_PATH }}
           if-no-files-found: warn
 
       # - name: Print Driver Data JSON
