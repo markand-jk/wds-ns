@@ -1,11 +1,8 @@
-
 name: Windows Driver Sample HLK Test (Build + HLK)
-
 on:
   workflow_dispatch:
 
 jobs:
-
   build-samples:
     uses: markand-jk/wds-ns/.github/workflows/build_ci.yml@main
     strategy:
