@@ -9,21 +9,21 @@ jobs:
 
     steps:
       - name: Cleanup Workspace
-        shell: pwsh
+        shell: powershell
         run: |
           Write-Host "Cleaning workspace: $Env:GITHUB_WORKSPACE"
           Remove-Item -Path (Join-Path $Env:GITHUB_WORKSPACE '*') -Recurse -Force
 
-  #     - name: Download all driver build artifacts
-  #       uses: actions/download-artifact@v4
-  #       with:
-  #         path: build-artifacts
+      - name: Download all driver build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: build-artifacts
 
-  #     - name: Verify downloaded artifacts
-  #       shell: pwsh
-  #       run: |
-  #         Write-Host "Downloaded artifacts:"
-  #         Get-ChildItem -Recurse build-artifacts
+      - name: Verify downloaded artifacts
+        shell: pwsh
+        run: |
+          Write-Host "Downloaded artifacts:"
+          Get-ChildItem -Recurse build-artifacts
 
   # hlk-run:
   #   needs: download-artifacts
