@@ -2,35 +2,60 @@ name: HLK Testing
 
 on:
   workflow_call:
-    inputs:
-      category:
-        required: true
-        type: string
 
 jobs:
-  hlk:
+  download-artifacts:
     runs-on: self-hosted
+
     steps:
-      - name: HLK test Step 1
-        shell: powershell
+      - name: Cleanup Workspace
+        shell: pwsh
         run: |
-          Write-Host "[+] Build Step 1...."
+          Write-Host "Cleaning workspace: $Env:GITHUB_WORKSPACE"
+          Remove-Item -Path (Join-Path $Env:GITHUB_WORKSPACE '*') -Recurse -Force
 
-      - name: Echo input values
-        run: |
-          echo "Driver Category: ${{ inputs.category }}"
+  #     - name: Download all driver build artifacts
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         path: build-artifacts
 
-    # strategy:
-    #   fail-fast: false
-    #   matrix:
-    #     platform:
-    #       - { Name: "Windows10_x86"     }
-    #       - { Name: "Windows10_x64"     }
-    #       - { Name: "Win11_22H2_x64"    }
-    #       - { Name: "Win11_23H2_x64"    }
-    #       - { Name: "Win11_24H2_x64"    }
-    #       - { Name: "Win11_25H2_x64"    }
-    #       - { Name: "Win11_26H1_x64"    }
-    #       - { Name: "Win11_24H2_arm64"  }
-    #       - { Name: "Win11_25H2_arm64"  }
-    #       - { Name: "Win11_26H2_arm64"  }
+  #     - name: Verify downloaded artifacts
+  #       shell: pwsh
+  #       run: |
+  #         Write-Host "Downloaded artifacts:"
+  #         Get-ChildItem -Recurse build-artifacts
+
+  # hlk-run:
+  #   needs: download-artifacts
+  #   runs-on: self-hosted
+
+  #   strategy:
+  #     max-parallel: 5
+  #     matrix:
+  #       category: [ "Debug", "Multimedia" ]
+
+  #   steps:
+  #     - name: Verify artifacts are available
+  #       shell: powershell
+  #       run: |
+  #         Write-Host "Artifacts available for HLK:"
+  #         Get-ChildItem -Recurse build-artifacts
+
+  #     - name: Run HLK tests
+  #       shell: powershell
+  #       run: |
+  #         Write-Host "Running HLK category: ${{ matrix.category }}"
+  #   # strategy:
+  #   #   fail-fast: false
+  #   #   matrix:
+  #   #     platform:
+  #   #       - { Name: "Windows10_x86"     }
+  #   #       - { Name: "Windows10_x64"     }
+  #   #       - { Name: "Win11_22H2_x64"    }
+  #   #       - { Name: "Win11_23H2_x64"    }
+  #   #       - { Name: "Win11_24H2_x64"    }
+  #   #       - { Name: "Win11_25H2_x64"    }
+  #   #       - { Name: "Win11_26H1_x64"    }
+  #   #       - { Name: "Win11_24H2_arm64"  }
+  #   #       - { Name: "Win11_25H2_arm64"  }
+  #   #       - { Name: "Win11_26H2_arm64"  }
