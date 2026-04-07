@@ -17,10 +17,4 @@ jobs:
   hlk-test:
     needs: build-samples
     uses: markand-jk/wds-ns/.github/workflows/hlk_ci.yml@main
-    strategy:
-      max-parallel: 5
-      matrix:
-        category: [ "Debug", "Multimedia" ]
-    with:
-      category: ${{ matrix.category }}
     secrets: inherit
