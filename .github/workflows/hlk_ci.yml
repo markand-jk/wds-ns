@@ -37,7 +37,7 @@ jobs:
       max-parallel: 5
       matrix:
         platform:
-          - { Name: "Win11_25H2_x64"}
+          - "Win11_25H2_x64"
 
   #   #       - { Name: "Windows10_x86"     }
   #   #       - { Name: "Windows10_x64"     }
