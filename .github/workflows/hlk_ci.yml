@@ -91,6 +91,24 @@ jobs:
         run: |
           $PSVersionTable
 
+
+          $pass = ConvertTo-SecureString "Wyse#1234" -AsPlainText -Force
+          $cred = New-Object System.Management.Automation.PSCredential (
+              "DESKTOP-Win11-25H2\labsetup.cg",
+              $pass
+          )
+
+          Invoke-Command `
+            -ComputerName DESKTOP-Win11-25H2 `
+            -Credential $cred `
+            -Authentication Negotiate `
+            -ScriptBlock {
+                hostname
+                whoami
+            }
+
+
+
           # $machine = "DESKTOP-Win11-25H2"
           # $user = "labsetup.cg"
           # $password = "Wyse#1234"
