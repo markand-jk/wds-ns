@@ -27,7 +27,7 @@ jobs:
         shell: powershell
         run: |
           Write-Host "Downloaded artifacts:"
-          Get-ChildItem -Recurse build-artifacts
+          # Get-ChildItem -Recurse build-artifacts
 
   hlk-run:
     needs: download-artifacts
