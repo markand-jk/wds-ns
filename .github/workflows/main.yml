@@ -2,14 +2,14 @@ name: Windows Driver Sample HLK Test (Build + HLK)
 on:
   workflow_dispatch:
     inputs:
-      platform:
-        description: "Select target platform"
-        type: choice
-        required: true
-        default: x64
-        options:
-          - x64
-          - ARM64
+      # platform:
+      #   description: "Select target platform"
+      #   type: choice
+      #   required: true
+      #   default: x64
+      #   options:
+      #     - x64
+      #     - ARM64
       driverType:
         description: "Select driver type"
         type: choice
