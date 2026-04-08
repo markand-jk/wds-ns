@@ -54,13 +54,13 @@ jobs:
       - name: Verify artifacts are available
         shell: powershell
         run: |
-          Write-Host "Artifacts available for HLK:"
+          Write-Host "Artifacts available for HLK: ${{ matrix.platform }}"
           Get-ChildItem -Recurse build-artifacts
 
       - name: Get machine info
         shell: powershell
         run: |
-          $platform = ${{ matrix.platform }}
+          $platform = "${{ matrix.platform }}"
           $servers = Get-Content "servers.json" -Raw | ConvertFrom-Json
 
           $server = $servers | Where-Object { $_.platform -eq $platform }
