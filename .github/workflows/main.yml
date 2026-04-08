@@ -1,6 +1,23 @@
 name: Windows Driver Sample HLK Test (Build + HLK)
 on:
   workflow_dispatch:
+    inputs:
+      platform:
+        description: "Select target platform"
+        type: choice
+        required: true
+        default: x64
+        options:
+          - x64
+          - ARM64
+      driverType:
+        description: "Select driver type"
+        type: choice
+        required: true
+        default: "Multimedia"
+        options:
+          - Multimedia
+          - Default
 
 jobs:
   build-samples:
@@ -17,4 +34,6 @@ jobs:
   hlk-test:
     needs: build-samples
     uses: markand-jk/wds-ns/.github/workflows/hlk_ci.yml@main
+    with:
+      driverType: ${{ inputs.driverType }}
     secrets: inherit
