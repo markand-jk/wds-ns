@@ -24,7 +24,7 @@ jobs:
       #     path: build-artifacts
 
       - name: Verify downloaded artifacts
-        shell: pwsh
+        shell: powershell
         run: |
           Write-Host "Downloaded artifacts:"
           Get-ChildItem -Recurse build-artifacts
