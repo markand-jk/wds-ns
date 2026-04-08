@@ -89,22 +89,24 @@ jobs:
       - name: Install Drivers to DUT
         shell: pwsh
         run: |
-          $machine = "DESKTOP-Win11-25H2"
-          $user = "labsetup.cg"
-          $password = "Wyse#1234"
+          $PSVersionTable
 
-          $sec = ConvertTo-SecureString $password -AsPlainText -Force
-          $cred = New-Object System.Management.Automation.PSCredential ($user, $sec)
+          # $machine = "DESKTOP-Win11-25H2"
+          # $user = "labsetup.cg"
+          # $password = "Wyse#1234"
 
-          $session = New-PSSession -ComputerName $machine -Credential $cred
+          # $sec = ConvertTo-SecureString $password -AsPlainText -Force
+          # $cred = New-Object System.Management.Automation.PSCredential ($user, $sec)
 
-          # Create drivertest Directory
-          Invoke-Command -Session $session -ScriptBlock {
-              Remove-Item -Path "c:\drivertest" -Recurse -Force
-              New-Item -Path "c:\drivertest" -ItemType Directory -Force -ErrorAction Stop | Out-Null
-              hostname
-              dir
-          }
+          # $session = New-PSSession -ComputerName $machine -Credential $cred
+
+          # # Create drivertest Directory
+          # Invoke-Command -Session $session -ScriptBlock {
+          #     Remove-Item -Path "c:\drivertest" -Recurse -Force
+          #     New-Item -Path "c:\drivertest" -ItemType Directory -Force -ErrorAction Stop | Out-Null
+          #     hostname
+          #     dir
+          # }
 
 # # Copy Binaries to DUT
 # Write-Host "Copying the driver binary archives...."
