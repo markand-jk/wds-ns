@@ -53,52 +53,83 @@ jobs:
 
     env:
       defaultPassword: ${{ secrets.DEFAULT_PASSWORD }}
+      platform: ${{ matrix.platform }}
 
 
     steps:
       - name: Checkout NS
         uses: actions/checkout@v4
 
-      - name: Verify artifacts are available
+      - name: Get Controller & DUT Information
         shell: powershell
         run: |
-          Write-Host "Artifacts available for HLK: ${{ matrix.platform }}"
-
-      - name: Get machine info
-        shell: powershell
-        run: |
-          $platform = "${{ matrix.platform }}"
           $servers = Get-Content "machine-data.json" -Raw | ConvertFrom-Json
-
-          $server = $servers | Where-Object { $_.platform -eq $platform }
-
+          $server = $servers | Where-Object { $_.platform -eq $Env:platform }
           if (-not $server) {
-              throw "No server configuration found for platform: $platform"
+              throw "No server configuration found for platform: $Env:platform"
           }
-
-          # # Controller info
-          # $controllerIp   = $server.controller.ip
-          # $controllerUser = $server.controller.username
-          # $controllerPass = $Env:defaultPassword
-
-          # # DUT info
-          # $dutIp   = $server.dut.ip
-          # $dutUser = $server.dut.username
-          # $dutPass = $Env:defaultPassword
-
-
-
-          Add-Content $Env:GITHUB_ENV "CONTROLLER_IP=$($server.controller.ip)"
+          Add-Content $Env:GITHUB_ENV "CONTROLLER_HOSTNAME=$($server.controller.ip)"
           Add-Content $Env:GITHUB_ENV "CONTROLLER_USER=$($server.controller.username)"
           Add-Content $Env:GITHUB_ENV "CONTROLLER_PASSWORD=$($Env:defaultPassword)"
 
-          Add-Content $Env:GITHUB_ENV "DUT_IP==$($server.dut.ip)"
-          Add-Content $Env:GITHUB_ENV "DUT_USER==$($server.dut.username)"
+          Add-Content $Env:GITHUB_ENV "DUT_HOSTNAME=$($server.dut.ip)"
+          Add-Content $Env:GITHUB_ENV "DUT_USER=$($server.dut.username)"
           Add-Content $Env:GITHUB_ENV "DUT_PASSWORD=$($Env:defaultPassword)"
 
-
-      - name: Verify artifacts are available
+      - name: Print Controller & DUT Information
         shell: powershell
         run: |
-          Write-Host "DUT: $Env:CONTROLLER_IP, $Env:CONTROLLER_USER, $Env:CONTROLLER_PASSWORD"
-          Write-Host "DUT: $Env:DUT_IP, $Env:DUT_USER, $Env:DUT_PASSWORD"
+          Write-Host "DUT: $Env:CONTROLLER_HOSTNAME, $Env:CONTROLLER_USER, $Env:CONTROLLER_PASSWORD"
+          Write-Host "DUT: $Env:DUT_HOSTNAME, $Env:DUT_USER, $Env:DUT_PASSWORD"
+
+      - name: Install Drivers to DUT
+        shell: powershell
+        run: |
+          $sec = ConvertTo-SecureString $Env:DUT_PASSWORD -AsPlainText -Force
+          $cred = New-Object System.Management.Automation.PSCredential ($Env:DUT_USER, $sec)
+          $session = New-PSSession -ComputerName $Env:DUT_HOSTNAME -Credential $cred
+
+          # Create drivertest Directory
+          Invoke-Command -Session $session -ScriptBlock {
+              Remove-Item -Path "c:\drivertest" -Recurse -Force
+              New-Item -Path "c:\drivertest" -ItemType Directory -Force -ErrorAction Stop | Out-Null
+              hostname
+              dir
+          }
+
+# # Copy Binaries to DUT
+# Write-Host "Copying the driver binary archives...."
+# Copy-Item -Path "C:\hlktest\built-drivers-binaries.zip" -Destination "c:\drivertest\" -ToSession $session
+
+# Write-Host "Copying the devcon utility...."
+# Copy-Item -Path "C:\hlktest\devcon.exe" -Destination "c:\drivertest\" -ToSession $session
+
+# # Unzip Drivers
+# Invoke-Command -Session $session -ScriptBlock {
+#     Write-Host "Unzip the driver archive"
+#     Expand-Archive -Path "c:\drivertest\built-drivers-binaries.zip" `
+#                    -DestinationPath "c:\drivertest\" `
+#                    -Force
+# }
+
+# # Install Driver
+# Invoke-Command -Session $session -ScriptBlock {
+#     param($platform, $config, $d)
+
+#     $infPath = "c:\drivertest\$platform-$config\$($d.category)\$($d.driverName)"
+
+#     Write-Host "Copy devcon.exe to driver directory..."
+#     Copy-Item -Path "c:\drivertest\devcon.exe" -Destination $infPath
+
+#     # Change Directory to Driver INF Location
+#     Write-Host "Changing directory to: $infPath"
+#     Set-Location $infPath
+
+#     Get-ChildItem | Format-Table -AutoSize
+
+#     Write-Host "Execute the Install Command:"
+#     Write-Host $($d.installCmd)
+
+#     Write-Host "Check Driver Install Status:"
+#     Invoke-Expression $($d.verifyCmd)
+# } -ArgumentList $Platform, $Config, $driverData[0]
