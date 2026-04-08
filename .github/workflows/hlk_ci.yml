@@ -91,10 +91,7 @@ jobs:
         run: |
           $machine = $Env:DUT_HOSTNAME
           $user = $Env:DUT_USER
-          $password = "Wyse#1234"
           $password = $Env:DUT_PASSWORD
-
-
           $pass = ConvertTo-SecureString $password -AsPlainText -Force
           $cred = New-Object System.Management.Automation.PSCredential (
               "$machine\$user",
@@ -111,6 +108,15 @@ jobs:
             }
 
 
+          $session = New-PSSession `
+            -ComputerName $machine `
+            -Credential $cred `
+            -Authentication Negotiate
+
+          Invoke-Command -Session $session -ScriptBlock {
+              hostname
+              ls
+          }
 
 
 
