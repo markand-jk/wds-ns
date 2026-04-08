@@ -3,9 +3,6 @@ name: HLK Testing
 on:
   workflow_call:
     inputs:
-      platform:
-        required: true
-        type: string
       driverType:
         required: true
         type: string
