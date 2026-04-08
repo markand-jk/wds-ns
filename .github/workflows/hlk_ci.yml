@@ -81,6 +81,7 @@ jobs:
         run: |
           Write-Host "DUT: $Env:CONTROLLER_HOSTNAME, $Env:CONTROLLER_USER, $Env:CONTROLLER_PASSWORD"
           Write-Host "DUT: $Env:DUT_HOSTNAME, $Env:DUT_USER, $Env:DUT_PASSWORD"
+          $PSVersionTable
 
       - name: Install Drivers to DUT
         shell: powershell
