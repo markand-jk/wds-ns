@@ -89,8 +89,8 @@ jobs:
       - name: Install Drivers to DUT
         shell: pwsh
         run: |
-          $machine = "DESKTOP-Win11-25H2"
-          $user = "labsetup.cg"
+          $machine = $Env:DUT_HOSTNAME
+          $user = $Env:DUT_USER
           $password = "Wyse#1234"
 
           $pass = ConvertTo-SecureString "Wyse#1234" -AsPlainText -Force
