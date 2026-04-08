@@ -37,25 +37,7 @@ jobs:
       max-parallel: 5
       matrix:
         platform:
-          - { Name: "Win11_24H2_x64"}
           - { Name: "Win11_25H2_x64"}
-          - { Name: "Win11_26H1_x64"}
-
-    steps:
-      - name: Verify artifacts are available
-        shell: powershell
-        run: |
-          Write-Host "Artifacts available for HLK:"
-          Get-ChildItem -Recurse build-artifacts
-
-  #     - name: Run HLK tests
-  #       shell: powershell
-  #       run: |
-  #         Write-Host "Running HLK category: ${{ matrix.category }}"
-  #   # strategy:
-  #   #   fail-fast: false
-  #   #   matrix:
-  #   #     platform:
 
   #   #       - { Name: "Windows10_x86"     }
   #   #       - { Name: "Windows10_x64"     }
@@ -67,3 +49,36 @@ jobs:
   #   #       - { Name: "Win11_24H2_arm64"  }
   #   #       - { Name: "Win11_25H2_arm64"  }
   #   #       - { Name: "Win11_26H2_arm64"  }
+
+    steps:
+      - name: Verify artifacts are available
+        shell: powershell
+        run: |
+          Write-Host "Artifacts available for HLK:"
+          Get-ChildItem -Recurse build-artifacts
+
+      - name: Get machine info
+        shell: powershell
+        run: |
+          $platform = ${{ matrix.platform }}
+          $servers = Get-Content "servers.json" -Raw | ConvertFrom-Json
+
+          $server = $servers | Where-Object { $_.platform -eq $platform }
+
+          if (-not $server) {
+              throw "No server configuration found for platform: $platform"
+          }
+
+          # Controller info
+          $controllerIp   = $server.controller.ip
+          $controllerUser = $server.controller.username
+          $controllerPass = $server.controller.password
+
+          # DUT info
+          $dutIp   = $server.dut.ip
+          $dutUser = $server.dut.username
+          $dutPass = $server.dut.password
+
+          Write-Host "Platform: $platform"
+          Write-Host "Controller IP: $controllerIp"
+          Write-Host "DUT IP: $dutIp"
