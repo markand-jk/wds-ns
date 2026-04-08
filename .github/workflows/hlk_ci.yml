@@ -50,6 +50,11 @@ jobs:
   #   #       - { Name: "Win11_25H2_arm64"  }
   #   #       - { Name: "Win11_26H2_arm64"  }
 
+
+    env:
+      defaultPassword: ${{ secrets.DEFAULT_PASSWORD }}
+
+
     steps:
       - name: Checkout NS
         uses: actions/checkout@v4
@@ -71,16 +76,29 @@ jobs:
               throw "No server configuration found for platform: $platform"
           }
 
-          # Controller info
-          $controllerIp   = $server.controller.ip
-          $controllerUser = $server.controller.username
-          $controllerPass = $server.controller.password
+          # # Controller info
+          # $controllerIp   = $server.controller.ip
+          # $controllerUser = $server.controller.username
+          # $controllerPass = $Env:defaultPassword
 
-          # DUT info
-          $dutIp   = $server.dut.ip
-          $dutUser = $server.dut.username
-          $dutPass = $server.dut.password
+          # # DUT info
+          # $dutIp   = $server.dut.ip
+          # $dutUser = $server.dut.username
+          # $dutPass = $Env:defaultPassword
 
-          Write-Host "Platform: $platform"
-          Write-Host "Controller IP: $controllerIp"
-          Write-Host "DUT IP: $dutIp"
+
+
+          Add-Content $Env:GITHUB_ENV "CONTROLLER_IP=$($server.controller.ip)"
+          Add-Content $Env:GITHUB_ENV "CONTROLLER_USER=$($server.controller.username)"
+          Add-Content $Env:GITHUB_ENV "CONTROLLER_PASSWORD=$($Env:defaultPassword)"
+
+          Add-Content $Env:GITHUB_ENV "DUT_IP==$($server.dut.ip)"
+          Add-Content $Env:GITHUB_ENV "DUT_USER==$($server.dut.username)"
+          Add-Content $Env:GITHUB_ENV "DUT_PASSWORD=$($Env:defaultPassword)"
+
+
+      - name: Verify artifacts are available
+        shell: powershell
+        run: |
+          Write-Host "DUT: $Env:CONTROLLER_IP, $Env:CONTROLLER_USER, $Env:CONTROLLER_PASSWORD"
+          Write-Host "DUT: $Env:DUT_IP, $Env:DUT_USER, $Env:DUT_PASSWORD"
