@@ -89,17 +89,18 @@ jobs:
       - name: Install Drivers to DUT
         shell: pwsh
         run: |
-          $PSVersionTable
-
+          $machine = "DESKTOP-Win11-25H2"
+          $user = "labsetup.cg"
+          $password = "Wyse#1234"
 
           $pass = ConvertTo-SecureString "Wyse#1234" -AsPlainText -Force
           $cred = New-Object System.Management.Automation.PSCredential (
-              "DESKTOP-Win11-25H2\labsetup.cg",
+              "$machine\$user",
               $pass
           )
 
           Invoke-Command `
-            -ComputerName DESKTOP-Win11-25H2 `
+            -ComputerName $machine `
             -Credential $cred `
             -Authentication Negotiate `
             -ScriptBlock {
@@ -109,9 +110,7 @@ jobs:
 
 
 
-          # $machine = "DESKTOP-Win11-25H2"
-          # $user = "labsetup.cg"
-          # $password = "Wyse#1234"
+
 
           # $sec = ConvertTo-SecureString $password -AsPlainText -Force
           # $cred = New-Object System.Management.Automation.PSCredential ($user, $sec)
