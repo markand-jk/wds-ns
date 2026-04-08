@@ -89,9 +89,14 @@ jobs:
       - name: Install Drivers to DUT
         shell: pwsh
         run: |
-          $sec = ConvertTo-SecureString $Env:DUT_PASSWORD -AsPlainText -Force
-          $cred = New-Object System.Management.Automation.PSCredential ($Env:DUT_USER, $sec)
-          $session = New-PSSession -ComputerName $Env:DUT_HOSTNAME -Credential $cred
+          $machine = "DESKTOP-Win11-25H2"
+          $user = "labsetup.cg"
+          $password = "Wyse#1234"
+
+          $sec = ConvertTo-SecureString $password -AsPlainText -Force
+          $cred = New-Object System.Management.Automation.PSCredential ($user, $sec)
+
+          $session = New-PSSession -ComputerName $machine -Credential $cred
 
           # Create drivertest Directory
           Invoke-Command -Session $session -ScriptBlock {
