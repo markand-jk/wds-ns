@@ -51,17 +51,19 @@ jobs:
   #   #       - { Name: "Win11_26H2_arm64"  }
 
     steps:
+      - name: Checkout NS
+        uses: actions/checkout@v4
+
       - name: Verify artifacts are available
         shell: powershell
         run: |
           Write-Host "Artifacts available for HLK: ${{ matrix.platform }}"
-          Get-ChildItem -Recurse build-artifacts
 
       - name: Get machine info
         shell: powershell
         run: |
           $platform = "${{ matrix.platform }}"
-          $servers = Get-Content "servers.json" -Raw | ConvertFrom-Json
+          $servers = Get-Content "machine-data.json" -Raw | ConvertFrom-Json
 
           $server = $servers | Where-Object { $_.platform -eq $platform }
 
