@@ -3,6 +3,9 @@ name: HLK Testing
 on:
   workflow_call:
     inputs:
+      platform:
+        required: true
+        type: string
       driverType:
         required: true
         type: string
@@ -54,6 +57,10 @@ jobs:
     env:
       defaultPassword: ${{ secrets.DEFAULT_PASSWORD }}
       platform: ${{ matrix.platform }}
+      WORKSPACE_RUNNER: "c:\\hlktest\\"
+      WORKSPACE_DUT: "c:\\hlktest\\"
+      WORKSPACE_CTRLR: "c:\\hlktest\\"
+      DRIVER_BINDIR: "build-artifacts"
 
 
     steps:
@@ -68,6 +75,8 @@ jobs:
           if (-not $server) {
               throw "No server configuration found for platform: $Env:platform"
           }
+          Add-Content $Env:GITHUB_ENV "PLATFORM_TYPE=$($server.platformType)"
+
           Add-Content $Env:GITHUB_ENV "CONTROLLER_HOSTNAME=$($server.controller.ip)"
           Add-Content $Env:GITHUB_ENV "CONTROLLER_USER=$($server.controller.username)"
           Add-Content $Env:GITHUB_ENV "CONTROLLER_PASSWORD=$($Env:defaultPassword)"
@@ -97,27 +106,26 @@ jobs:
               "$machine\$user",
               $pass
           )
-
-          Invoke-Command `
-            -ComputerName $machine `
-            -Credential $cred `
-            -Authentication Negotiate `
-            -ScriptBlock {
-                hostname
-                whoami
-            }
-
-
-          $session = New-PSSession `
-            -ComputerName $machine `
-            -Credential $cred `
+          $session = New-PSSession -ComputerName $machine -Credential $cred `
             -Authentication Negotiate
 
           Invoke-Command -Session $session -ScriptBlock {
-              hostname
-              ls
+              Remove-Item -Path "$Env:WORKSPACE_DUT" -Recurse -Force
+              New-Item -Path "$Env:WORKSPACE_DUT" -ItemType Directory -Force -ErrorAction Stop | Out-Null
           }
 
+          Write-Host "Copying the driver binary archives...."
+          Copy-Item
+            -Path "$Env:WORKSPACE_RUNNER\\$Env:DRIVER_BINDIR\\$Env:PLATFORM_TYPE" `
+            -Destination "$Env:WORKSPACE_DUT" `
+            -Recurse
+            -ToSession $session
+
+          Write-Host "Copying the devcon utility...."
+          Copy-Item
+            -Path "$Env:WORKSPACE_RUNNER\\devcon.exe"
+            -Destination "$Env:WORKSPACE_DUT\\"
+            -ToSession $session
 
 
           # $sec = ConvertTo-SecureString $password -AsPlainText -Force
