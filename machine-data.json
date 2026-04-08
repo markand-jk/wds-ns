@@ -1,0 +1,28 @@
+[
+  {
+    "platform": "Win11_24H2_x64",
+    "controller": {
+      "ip": "WIN-KVK3MD1FN4E",
+      "username": "administrator",
+      "password": ""
+    },
+    "dut": {
+      "ip": "DESKTOP-Win11-25H2",
+      "username": "labsetup.cg",
+      "password": ""
+    }
+  },
+  {
+    "platform": "Win11_25H2_x64",
+    "controller": {
+      "ip": "192.168.2.10",
+      "username": "controller_admin",
+      "password": "CONTROLLER_PASSWORD"
+    },
+    "dut": {
+      "ip": "192.168.2.20",
+      "username": "dut_admin",
+      "password": "DUT_PASSWORD"
+    }
+  }
+]
