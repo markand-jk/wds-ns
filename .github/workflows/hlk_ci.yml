@@ -84,7 +84,7 @@ jobs:
           $PSVersionTable
 
       - name: Install Drivers to DUT
-        shell: powershell
+        shell: pwsh
         run: |
           $sec = ConvertTo-SecureString $Env:DUT_PASSWORD -AsPlainText -Force
           $cred = New-Object System.Management.Automation.PSCredential ($Env:DUT_USER, $sec)
