@@ -2,6 +2,10 @@ name: HLK Testing
 
 on:
   workflow_call:
+    inputs:
+      driverType:
+        required: true
+        type: string
 
 jobs:
   download-artifacts:
@@ -20,7 +24,7 @@ jobs:
           path: build-artifacts
 
       - name: Verify downloaded artifacts
-        shell: powershell
+        shell: pwsh
         run: |
           Write-Host "Downloaded artifacts:"
           Get-ChildItem -Recurse build-artifacts
