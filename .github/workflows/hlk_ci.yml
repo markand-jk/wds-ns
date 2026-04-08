@@ -92,8 +92,10 @@ jobs:
           $machine = $Env:DUT_HOSTNAME
           $user = $Env:DUT_USER
           $password = "Wyse#1234"
+          $password = $Env:DUT_PASSWORD
 
-          $pass = ConvertTo-SecureString "Wyse#1234" -AsPlainText -Force
+
+          $pass = ConvertTo-SecureString $password -AsPlainText -Force
           $cred = New-Object System.Management.Automation.PSCredential (
               "$machine\$user",
               $pass
