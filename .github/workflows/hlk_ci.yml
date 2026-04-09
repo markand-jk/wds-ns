@@ -74,7 +74,7 @@ jobs:
       - name: Checkout NS
         uses: actions/checkout@v4
 
-      - name: Get Controller & DUT Information
+      - name: Get Controller / DUT Information
         shell: powershell
         run: |
           $servers = Get-Content "machine-data.json" -Raw | ConvertFrom-Json
@@ -98,25 +98,20 @@ jobs:
           $jsonPath = Join-Path $Env:GITHUB_WORKSPACE "driver-data.json"
           Write-Host "Reading JSON from: $jsonPath"
 
+          $Platform = $Env:PLATFORM
+          $Config = $Env:CONFIG
+
           $json = Get-Content $jsonPath -Raw
-          $driverData = $json | ConvertFrom-Json
+          $json = $ExecutionContext.InvokeCommand.ExpandString($json)
 
-          $driverJson = $driverData | ConvertTo-Json -Depth 10
-          Add-Content $Env:GITHUB_ENV "DRIVER_DATA<<EOF"
-          Add-Content $Env:GITHUB_ENV $driverJson
-          Add-Content $Env:GITHUB_ENV "EOF"
-
+          $drivers = ($json | ConvertFrom-Json) | Where-Object type -eq ${{ inputs.driverType }}
+          $driversJson = $drivers | ConvertTo-Json -Compress
+          "DRIVERS=$driversJson" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
 
       - name: Get Driver Information
         shell: powershell
         run: |
-          $Platform = $Env:PLATFORM
-          $Config = $Env:CONFIG
-
-          $json = $Env:DRIVER_DATA
-          $json = $ExecutionContext.InvokeCommand.ExpandString($json)
-
-          $drivers = ($json | ConvertFrom-Json) | Where-Object type -eq ${{ inputs.driverType }}
+          $drivers = $Env:DRIVERS | ConvertFrom-Json
           $drivers | ForEach-Object { $_ }
           throw "force exit..."
 
