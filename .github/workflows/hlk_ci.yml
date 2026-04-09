@@ -126,7 +126,7 @@ jobs:
           Write-Host "Copying the devcon utility...."
           Copy-Item `
             -Path "$Env:WORKSPACE_RUNNER\devcon.exe" `
-            -Destination "$Env:WORKSPACE_DUT\" `
+            -Destination "$Env:WORKSPACE_DUT" `
             -ToSession $session
 
 
