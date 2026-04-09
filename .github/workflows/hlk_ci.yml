@@ -117,14 +117,14 @@ jobs:
 
           Write-Host "Copying the driver binary archives...."
           Write-Host "$Env:WORKSPACE_RUNNER\$Env:DRIVER_BINDIR\$Env:PLATFORM_TYPE => $Env:WORKSPACE_DUT"
-          Copy-Item
+          Copy-Item `
             -Path "$Env:WORKSPACE_RUNNER\$Env:DRIVER_BINDIR\$Env:PLATFORM_TYPE" `
             -Destination "$Env:WORKSPACE_DUT" `
             -Recurse `
             -ToSession $session
 
           Write-Host "Copying the devcon utility...."
-          Copy-Item
+          Copy-Item `
             -Path "$Env:WORKSPACE_RUNNER\devcon.exe"
             -Destination "$Env:WORKSPACE_DUT\"
             -ToSession $session
