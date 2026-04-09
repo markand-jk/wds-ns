@@ -84,13 +84,9 @@ jobs:
           Write-Host ">>$Platform, $Config"
 
           $json = Get-Content $jsonPath -Raw
-          #$json = $ExecutionContext.InvokeCommand.ExpandString($json)
           $driverData = $json | ConvertFrom-Json
 
-          $driverData | ForEach-Object { $_ }
-          throw "force failing...."
           $driverJson = $driverData | ConvertTo-Json -Depth 10
-
           Add-Content $Env:GITHUB_ENV "DRIVER_DATA<<EOF"
           Add-Content $Env:GITHUB_ENV $driverJson
           Add-Content $Env:GITHUB_ENV "EOF"
@@ -150,7 +146,17 @@ jobs:
         shell: pwsh
         run: |
           $json = $Env:DRIVER_DATA
+          Write-Host "$json"
           $driverData = $json | ConvertFrom-Json
 
-          $driverData | ForEach-Object { $_ }
+#           $driverJsonStr = $driverData | ConvertTo-Json -Depth 10
+#           $driverJsonStr = $ExecutionContext.InvokeCommand.ExpandString($driverJsonStr)
+
+# driverJsonStr
+
+#           $driverData | ForEach-Object { $_ }
+#           throw "force failing...."
+
+
+#           $driverData | ForEach-Object { $_ }
           throw "force failing...."
