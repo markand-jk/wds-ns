@@ -176,8 +176,8 @@ jobs:
             $driverName  = $($driver.Driver)
             $relativeSrc = $($driver.Path)
             $fullSrcPath = Join-Path $env:WDS_PATH $relativeSrc
-            $destFolder = Join-Path $env:OUTPUT_PATH "${{ Env.PLATFORM }}-${{ Env.CONFIG }}\$category\$driverName"
-            #$destFolder = Join-Path $env:OUTPUT_PATH "$category\$driverName"
+            #$destFolder = Join-Path $env:OUTPUT_PATH "${{ Env.PLATFORM }}-${{ Env.CONFIG }}\$category\$driverName"
+            $destFolder = Join-Path $env:OUTPUT_PATH "$category\$driverName"
             Write-Host "Processing $driverName..."
             Write-Host "Copy from $fullSrcPath =>>> $destFolder"
 
@@ -197,7 +197,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           # name: built-drivers-binaries-${{ Env.PLATFORM }}-${{ github.run_id }}
-          name: built-drivers-binaries-${{ Env.PLATFORM }}
+          # name: built-drivers-binaries-${{ Env.PLATFORM }}
+          name: ${{ Env.PLATFORM }}
           path: ${{ Env.OUTPUT_PATH }}
           if-no-files-found: warn
 
