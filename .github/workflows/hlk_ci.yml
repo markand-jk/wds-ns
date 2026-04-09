@@ -108,23 +108,23 @@ jobs:
 
           Write-Host "Cleanup of $Env:WORKSPACE_DUT on HOST"
           Invoke-Command -Session $session -ScriptBlock {
-              Remove-Item -Path "$Env:WORKSPACE_DUT" -Recurse -Force
-              New-Item -Path "$Env:WORKSPACE_DUT" -ItemType Directory -Force -ErrorAction Stop | Out-Null
+              Remove-Item -Path $Env:WORKSPACE_DUT -Recurse -Force
+              New-Item -Path $Env:WORKSPACE_DUT -ItemType Directory -Force -ErrorAction Stop | Out-Null
           }
 
-          Write-Host "Copying the driver binary archives...."
-          Write-Host "$Env:WORKSPACE_RUNNER\\$Env:DRIVER_BINDIR\\$Env:PLATFORM_TYPE => $Env:WORKSPACE_DUT"
-          Copy-Item
-            -Path "$Env:WORKSPACE_RUNNER\\$Env:DRIVER_BINDIR\\$Env:PLATFORM_TYPE" `
-            -Destination "$Env:WORKSPACE_DUT" `
-            -Recurse
-            -ToSession $session
+          # Write-Host "Copying the driver binary archives...."
+          # Write-Host "$Env:WORKSPACE_RUNNER\\$Env:DRIVER_BINDIR\\$Env:PLATFORM_TYPE => $Env:WORKSPACE_DUT"
+          # Copy-Item
+          #   -Path "$Env:WORKSPACE_RUNNER\\$Env:DRIVER_BINDIR\\$Env:PLATFORM_TYPE" `
+          #   -Destination "$Env:WORKSPACE_DUT" `
+          #   -Recurse
+          #   -ToSession $session
 
-          Write-Host "Copying the devcon utility...."
-          Copy-Item
-            -Path "$Env:WORKSPACE_RUNNER\\devcon.exe"
-            -Destination "$Env:WORKSPACE_DUT\\"
-            -ToSession $session
+          # Write-Host "Copying the devcon utility...."
+          # Copy-Item
+          #   -Path "$Env:WORKSPACE_RUNNER\\devcon.exe"
+          #   -Destination "$Env:WORKSPACE_DUT\\"
+          #   -ToSession $session
 
 
           # $sec = ConvertTo-SecureString $password -AsPlainText -Force
