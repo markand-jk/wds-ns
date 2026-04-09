@@ -37,8 +37,8 @@ jobs:
       - name: Copy driver build artifacts
         shell: powershell
         run: |
-          if (Test-Path (Join-Path $Env:GITHUB_WORKSPACE $Env:DRIVER_DOWNLOAD_DIR)) {
-              Remove-Item -Path (Join-Path $Env:GITHUB_WORKSPACE $Env:DRIVER_DOWNLOAD_DIR) -Recurse -Force
+          if (Test-Path (Join-Path $Env:HLK_WORKSPACE $Env:DRIVER_DOWNLOAD_DIR)) {
+              Remove-Item -Path (Join-Path $Env:HLK_WORKSPACE $Env:DRIVER_DOWNLOAD_DIR) -Recurse -Force
           }
           Copy-Item `
             -Path (Join-Path $Env:GITHUB_WORKSPACE $Env:DRIVER_DOWNLOAD_DIR) `
