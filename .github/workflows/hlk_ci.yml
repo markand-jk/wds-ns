@@ -96,7 +96,8 @@ jobs:
         shell: powershell
         run: |
           $json = $Env:DRIVER_DATA
-          $Platform = $server.platform
+          Write-Host "$json"
+          $Platform = $Env:PLATFORM
           $Config = $Env:CONFIG
           $json = $ExecutionContext.InvokeCommand.ExpandString($json)
           $drivers = ($json | ConvertFrom-Json) | Where-Object type -eq ${{ inputs.driverType }}
