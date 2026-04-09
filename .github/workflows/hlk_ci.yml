@@ -83,15 +83,6 @@ jobs:
               throw "No server configuration found for OS: $Env:os"
           }
 
-          $json = $Env:DRIVER_DATA
-          $Platform = $server.platform
-          $Config = $Env:CONFIG
-          $json = $ExecutionContext.InvokeCommand.ExpandString($json)
-          $drivers = ($json | ConvertFrom-Json) | Where-Object type -eq ${{ inputs.driverType }}
-          $drivers | ForEach-Object { $_ }
-          throw "force exit...""
-
-
           Add-Content $Env:GITHUB_ENV "PLATFORM=$($server.platform)"
           Add-Content $Env:GITHUB_ENV "CONTROLLER_HOSTNAME=$($server.controller.ip)"
           Add-Content $Env:GITHUB_ENV "CONTROLLER_USER=$($server.controller.username)"
@@ -100,6 +91,17 @@ jobs:
           Add-Content $Env:GITHUB_ENV "DUT_HOSTNAME=$($server.dut.ip)"
           Add-Content $Env:GITHUB_ENV "DUT_USER=$($server.dut.username)"
           Add-Content $Env:GITHUB_ENV "DUT_PASSWORD=$($Env:defaultPassword)"
+
+      - name: Get Driver Information
+        shell: powershell
+        run: |
+          $json = $Env:DRIVER_DATA
+          $Platform = $server.platform
+          $Config = $Env:CONFIG
+          $json = $ExecutionContext.InvokeCommand.ExpandString($json)
+          $drivers = ($json | ConvertFrom-Json) | Where-Object type -eq ${{ inputs.driverType }}
+          $drivers | ForEach-Object { $_ }
+          throw "force exit...""
 
       - name: Print Controller & DUT Information
         shell: powershell
