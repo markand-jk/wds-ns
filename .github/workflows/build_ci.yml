@@ -176,8 +176,8 @@ jobs:
             $driverName  = $($driver.Driver)
             $relativeSrc = $($driver.Path)
             $fullSrcPath = Join-Path $env:WDS_PATH $relativeSrc
-            # $destFolder = Join-Path $env:OUTPUT_PATH "${{ Env.PLATFORM }}-${{ Env.CONFIG }}\$category\$driverName"
-            $destFolder = Join-Path $env:OUTPUT_PATH "$category\$driverName"
+            $destFolder = Join-Path $env:OUTPUT_PATH "${{ Env.PLATFORM }}-${{ Env.CONFIG }}\$category\$driverName"
+            #$destFolder = Join-Path $env:OUTPUT_PATH "$category\$driverName"
             Write-Host "Processing $driverName..."
             Write-Host "Copy from $fullSrcPath =>>> $destFolder"
 
