@@ -25,7 +25,7 @@ jobs:
       - name: Check for the HLK_WORKSPACE
         shell: powershell
         run: |
-          if ( -not Test-Path $Env:HLK_WORKSPACE) {
+          if (-not (Test-Path $Env:HLK_WORKSPACE)) {
             throw "HLK_WORKSPACE does not exist: $Env:HLK_WORKSPACE"
           }
 
@@ -54,7 +54,6 @@ jobs:
       matrix:
         os:
           - "Win11_25H2_x64"
-
   #   #       - { Name: "Windows10_x86"     }
   #   #       - { Name: "Windows10_x64"     }
   #   #       - { Name: "Win11_22H2_x64"    }
@@ -66,15 +65,9 @@ jobs:
   #   #       - { Name: "Win11_25H2_arm64"  }
   #   #       - { Name: "Win11_26H2_arm64"  }
 
-
     env:
       defaultPassword: ${{ secrets.DEFAULT_PASSWORD }}
       os: ${{ matrix.os }}
-      # WORKSPACE_RUNNER: "c:\\hlktest\\"
-      # WORKSPACE_DUT: "c:\\hlktest\\"
-      # WORKSPACE_CTRLR: "c:\\hlktest\\"
-      # DRIVER_BINDIR: "build-artifacts"
-
 
     steps:
       - name: Checkout NS
