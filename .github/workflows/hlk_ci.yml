@@ -108,9 +108,10 @@ jobs:
 
           Write-Host "Cleanup of $Env:WORKSPACE_DUT on HOST"
           Invoke-Command -Session $session -ScriptBlock {
-              Remove-Item -Path $Env:WORKSPACE_DUT -Recurse -Force
-              New-Item -Path $Env:WORKSPACE_DUT -ItemType Directory -Force -ErrorAction Stop | Out-Null
-          }
+              param($workspace)
+              Remove-Item -Path $workspace -Recurse -Force
+              New-Item -Path $workspace -ItemType Directory -Force -ErrorAction Stop | Out-Null
+          } -ArgumentList $Env:WORKSPACE_DUT
 
           # Write-Host "Copying the driver binary archives...."
           # Write-Host "$Env:WORKSPACE_RUNNER\\$Env:DRIVER_BINDIR\\$Env:PLATFORM_TYPE => $Env:WORKSPACE_DUT"
