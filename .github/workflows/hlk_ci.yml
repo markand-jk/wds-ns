@@ -7,6 +7,10 @@ on:
         required: true
         type: string
 
+env:
+  HLK_WORKSPACE: "c:\hlktesting"
+  DRIVER_DOWNLOAD_DIR: "build-artifacts"
+
 jobs:
   download-artifacts:
     runs-on: self-hosted
@@ -18,16 +22,30 @@ jobs:
           Write-Host "Cleaning workspace: $Env:GITHUB_WORKSPACE"
           Remove-Item -Path (Join-Path $Env:GITHUB_WORKSPACE '*') -Recurse -Force
 
+      - name: Check for the HLK_WORKSPACE
+        shell: powershell
+        run: |
+          if (Test-Path $Env:HLK_WORKSPACE) {
+            throw "HLK_WORKSPACE does not exist: $Env:HLK_WORKSPACE"
+          }
+
       - name: Download all driver build artifacts
         uses: actions/download-artifact@v4
         with:
-          path: build-artifacts
+          path: ${{ env.DRIVER_DOWNLOAD_DIR }}
 
-      - name: Verify downloaded artifacts
+      - name: Copy driver build artifacts
         shell: powershell
         run: |
-          Write-Host "Downloaded artifacts:"
-          Get-ChildItem -Recurse $Env:GITHUB_WORKSPACE
+          if (Test-Path (Join-Path $Env:GITHUB_WORKSPACE $Env:DRIVER_DOWNLOAD_DIR)) {
+              Remove-Item -Path (Join-Path $Env:GITHUB_WORKSPACE $Env:DRIVER_DOWNLOAD_DIR) -Recurse -Force
+          }
+          Copy-Item `
+            -Path (Join-Path $Env:GITHUB_WORKSPACE $Env:DRIVER_DOWNLOAD_DIR) `
+            -Destination (Join-Path $Env:HLK_WORKSPACE $Env:DRIVER_DOWNLOAD_DIR) `
+            -Recurse
+
+          Get-ChildItem -Recurse $Env:HLK_WORKSPACE
 
 #   hlk-run:
 #     needs: download-artifacts
