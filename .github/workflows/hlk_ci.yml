@@ -8,7 +8,7 @@ on:
         type: string
 
 env:
-  HLK_WORKSPACE: "c:\hlktesting"
+  HLK_WORKSPACE: "c:\\hlktesting"
   DRIVER_DOWNLOAD_DIR: "build-artifacts"
 
 jobs:
