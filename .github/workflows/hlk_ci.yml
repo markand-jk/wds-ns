@@ -101,7 +101,7 @@ jobs:
           $json = $ExecutionContext.InvokeCommand.ExpandString($json)
           $drivers = ($json | ConvertFrom-Json) | Where-Object type -eq ${{ inputs.driverType }}
           $drivers | ForEach-Object { $_ }
-          throw "force exit...""
+          throw "force exit..."
 
       - name: Print Controller & DUT Information
         shell: powershell
