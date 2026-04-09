@@ -76,8 +76,8 @@ jobs:
       - name: Load Driver Data JSON
         shell: pwsh
         run: |
-          $Platform = "${{ env.PLATFORM_X64 }}"
-          $Config   = "${{ env.CONFIG }}"
+          # $Platform = "${{ env.PLATFORM_X64 }}"
+          # $Config   = "${{ env.CONFIG }}"
 
           $jsonPath = Join-Path $Env:GITHUB_WORKSPACE "driver-data.json"
           Write-Host "Reading JSON from: $jsonPath"
@@ -86,6 +86,9 @@ jobs:
           $json = Get-Content $jsonPath -Raw
           #$json = $ExecutionContext.InvokeCommand.ExpandString($json)
           $driverData = $json | ConvertFrom-Json
+
+          $driverData | ForEach-Object { $_ }
+          throw "force failing...."
           $driverJson = $driverData | ConvertTo-Json -Depth 10
 
           Add-Content $Env:GITHUB_ENV "DRIVER_DATA<<EOF"
