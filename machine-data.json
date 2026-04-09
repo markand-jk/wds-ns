@@ -1,7 +1,7 @@
 [
   {
-    "platform": "Win11_25H2_x64",
-    "platformType": "x64",
+    "os": "Win11_25H2_x64",
+    "platform": "x64",
     "controller": {
       "ip": "WIN-KVK3MD1FN4E",
       "username": "administrator",
@@ -14,8 +14,8 @@
     }
   },
   {
-    "platform": "Win11_26H2_x64",
-    "platformType": "x64",
+    "os": "Win11_26H2_x64",
+    "platform": "x64",
     "controller": {
       "ip": "192.168.2.10",
       "username": "controller_admin",
