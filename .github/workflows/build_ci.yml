@@ -147,16 +147,5 @@ jobs:
         run: |
           $json = $Env:DRIVER_DATA
           Write-Host "$json"
-          $driverData = $json | ConvertFrom-Json
-
-#           $driverJsonStr = $driverData | ConvertTo-Json -Depth 10
-#           $driverJsonStr = $ExecutionContext.InvokeCommand.ExpandString($driverJsonStr)
-
-# driverJsonStr
-
-#           $driverData | ForEach-Object { $_ }
-#           throw "force failing...."
-
-
-#           $driverData | ForEach-Object { $_ }
           throw "force failing...."
+
