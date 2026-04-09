@@ -142,18 +142,14 @@ jobs:
       #     path: ${{ Env.OUTPUT_PATH }}
       #     if-no-files-found: warn
 
-      - name: Print Driver Data JSON
-        shell: pwsh
-        run: |
-          $Platform = "${{ env.PLATFORM_X64 }}"
-          $Config   = "${{ env.CONFIG }}"
+      # - name: Print Driver Data JSON
+      #   shell: pwsh
+      #   run: |
+      #     $Platform = "${{ env.PLATFORM_X64 }}"
+      #     $Config   = "${{ env.CONFIG }}"
 
+      #     $json = $Env:DRIVER_DATA
+      #     $json = $ExecutionContext.InvokeCommand.ExpandString($json)
 
-          $json = $Env:DRIVER_DATA
-          $json = $ExecutionContext.InvokeCommand.ExpandString($json)
-
-          $driverData = ($json | ConvertFrom-Json) | Where-Object type -eq 'multimedia'
-          $driverData | ForEach-Object { $_ }
-          throw "force failing...."
-
-
+      #     $driverData = ($json | ConvertFrom-Json) | Where-Object type -eq 'multimedia'
+      #     $driverData | ForEach-Object { $_ }
