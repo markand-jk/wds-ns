@@ -92,14 +92,30 @@ jobs:
           Add-Content $Env:GITHUB_ENV "DUT_USER=$($server.dut.username)"
           Add-Content $Env:GITHUB_ENV "DUT_PASSWORD=$($Env:defaultPassword)"
 
+      - name: Load Driver Data JSON
+        shell: pwsh
+        run: |
+          $jsonPath = Join-Path $Env:GITHUB_WORKSPACE "driver-data.json"
+          Write-Host "Reading JSON from: $jsonPath"
+
+          $json = Get-Content $jsonPath -Raw
+          $driverData = $json | ConvertFrom-Json
+
+          $driverJson = $driverData | ConvertTo-Json -Depth 10
+          Add-Content $Env:GITHUB_ENV "DRIVER_DATA<<EOF"
+          Add-Content $Env:GITHUB_ENV $driverJson
+          Add-Content $Env:GITHUB_ENV "EOF"
+
+
       - name: Get Driver Information
         shell: powershell
         run: |
-          $json = $Env:DRIVER_DATA
-          Write-Host "$json"
           $Platform = $Env:PLATFORM
           $Config = $Env:CONFIG
+
+          $json = $Env:DRIVER_DATA
           $json = $ExecutionContext.InvokeCommand.ExpandString($json)
+
           $drivers = ($json | ConvertFrom-Json) | Where-Object type -eq ${{ inputs.driverType }}
           $drivers | ForEach-Object { $_ }
           throw "force exit..."
