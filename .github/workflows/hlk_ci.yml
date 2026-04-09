@@ -25,7 +25,7 @@ jobs:
       - name: Check for the HLK_WORKSPACE
         shell: powershell
         run: |
-          if (Test-Path $Env:HLK_WORKSPACE) {
+          if ( -not Test-Path $Env:HLK_WORKSPACE) {
             throw "HLK_WORKSPACE does not exist: $Env:HLK_WORKSPACE"
           }
 
