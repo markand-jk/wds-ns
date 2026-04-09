@@ -10,6 +10,7 @@ on:
 env:
   HLK_WORKSPACE: "c:\\hlktest"
   DRIVER_BINDIR: "build-artifacts"
+  CONFIG: "RELEASE"
 
 jobs:
   # download-artifacts:
@@ -73,91 +74,108 @@ jobs:
       - name: Checkout NS
         uses: actions/checkout@v4
 
-      # - name: Get Controller & DUT Information
-      #   shell: powershell
-      #   run: |
-      #     $servers = Get-Content "machine-data.json" -Raw | ConvertFrom-Json
-      #     $server = $servers | Where-Object { $_.os -eq $Env:os }
-      #     if (-not $server) {
-      #         throw "No server configuration found for OS: $Env:os"
-      #     }
-      #     Add-Content $Env:GITHUB_ENV "PLATFORM=$($server.platform)"
+      - name: Get Controller & DUT Information
+        shell: powershell
+        run: |
+          $servers = Get-Content "machine-data.json" -Raw | ConvertFrom-Json
+          $server = $servers | Where-Object { $_.os -eq $Env:os }
+          if (-not $server) {
+              throw "No server configuration found for OS: $Env:os"
+          }
 
-      #     Add-Content $Env:GITHUB_ENV "CONTROLLER_HOSTNAME=$($server.controller.ip)"
-      #     Add-Content $Env:GITHUB_ENV "CONTROLLER_USER=$($server.controller.username)"
-      #     Add-Content $Env:GITHUB_ENV "CONTROLLER_PASSWORD=$($Env:defaultPassword)"
+          $json = $Env:DRIVER_DATA
+          $Platform = $server.platform
+          $Config = $Env:CONFIG
+          $json = $ExecutionContext.InvokeCommand.ExpandString($json)
+          $drivers = ($json | ConvertFrom-Json) | Where-Object type -eq ${{ inputs.driverType }}
+          $drivers | ForEach-Object { $_ }
+          throw "force exit...""
 
-      #     Add-Content $Env:GITHUB_ENV "DUT_HOSTNAME=$($server.dut.ip)"
-      #     Add-Content $Env:GITHUB_ENV "DUT_USER=$($server.dut.username)"
-      #     Add-Content $Env:GITHUB_ENV "DUT_PASSWORD=$($Env:defaultPassword)"
+
+          Add-Content $Env:GITHUB_ENV "PLATFORM=$($server.platform)"
+          Add-Content $Env:GITHUB_ENV "CONTROLLER_HOSTNAME=$($server.controller.ip)"
+          Add-Content $Env:GITHUB_ENV "CONTROLLER_USER=$($server.controller.username)"
+          Add-Content $Env:GITHUB_ENV "CONTROLLER_PASSWORD=$($Env:defaultPassword)"
+
+          Add-Content $Env:GITHUB_ENV "DUT_HOSTNAME=$($server.dut.ip)"
+          Add-Content $Env:GITHUB_ENV "DUT_USER=$($server.dut.username)"
+          Add-Content $Env:GITHUB_ENV "DUT_PASSWORD=$($Env:defaultPassword)"
 
       - name: Print Controller & DUT Information
         shell: powershell
         run: |
+          Write-Host "DUT: $Env:CONTROLLER_HOSTNAME, $Env:CONTROLLER_USER, $Env:CONTROLLER_PASSWORD"
+          Write-Host "DUT: $Env:DUT_HOSTNAME, $Env:DUT_USER, $Env:DUT_PASSWORD"
+          $PSVersionTable
+          where powershell
+          where pwsh
+          $env:PATH -split ';'
+
+      - name: Install Drivers to DUT
+        shell: pwsh
+        run: |
+          $Platform = "${{ env.PLATFORM_X64 }}"
+          $Config   = "${{ env.CONFIG }}"
+
+          $json = $Env:DRIVER_DATA
+          $json = $ExecutionContext.InvokeCommand.ExpandString($json)
+
+          $driverData = ($json | ConvertFrom-Json) | Where-Object type -eq 'multimedia'
+          $driverData | ForEach-Object { $_ }
 
 
-      #     Write-Host "DUT: $Env:CONTROLLER_HOSTNAME, $Env:CONTROLLER_USER, $Env:CONTROLLER_PASSWORD"
-      #     Write-Host "DUT: $Env:DUT_HOSTNAME, $Env:DUT_USER, $Env:DUT_PASSWORD"
-      #     $PSVersionTable
-      #     where powershell
-      #     where pwsh
-      #     $env:PATH -split ';'
+          $machine = $Env:DUT_HOSTNAME
+          $user = $Env:DUT_USER
+          $password = $Env:DUT_PASSWORD
+          $pass = ConvertTo-SecureString $password -AsPlainText -Force
+          $cred = New-Object System.Management.Automation.PSCredential (
+              "$machine\$user",
+              $pass
+          )
+          $session = New-PSSession -ComputerName $machine -Credential $cred `
+            -Authentication Negotiate
 
-      # - name: Install Drivers to DUT
-      #   shell: pwsh
-      #   run: |
-      #     $machine = $Env:DUT_HOSTNAME
-      #     $user = $Env:DUT_USER
-      #     $password = $Env:DUT_PASSWORD
-      #     $pass = ConvertTo-SecureString $password -AsPlainText -Force
-      #     $cred = New-Object System.Management.Automation.PSCredential (
-      #         "$machine\$user",
-      #         $pass
-      #     )
-      #     $session = New-PSSession -ComputerName $machine -Credential $cred `
-      #       -Authentication Negotiate
+          Write-Host "Cleanup of $Env:HLK_WORKSPACE on HOST"
+          Invoke-Command -Session $session -ScriptBlock {
+              param($workspace)
+              if (Test-Path $workspace) {
+                  Remove-Item -Path $workspace -Recurse -Force
+              }
+              New-Item -Path $workspace -ItemType Directory -Force -ErrorAction Stop | Out-Null
+          } -ArgumentList $Env:HLK_WORKSPACE
 
-      #     Write-Host "Cleanup of $Env:HLK_WORKSPACE on HOST"
-      #     Invoke-Command -Session $session -ScriptBlock {
-      #         param($workspace)
-      #         if (Test-Path $workspace) {
-      #             Remove-Item -Path $workspace -Recurse -Force
-      #         }
-      #         New-Item -Path $workspace -ItemType Directory -Force -ErrorAction Stop | Out-Null
-      #     } -ArgumentList $Env:HLK_WORKSPACE
+          Write-Host "Copying the driver binary artifacts...."
+          Write-Host "$Env:HLK_WORKSPACE\$Env:DRIVER_BINDIR\$Env:PLATFORM => $Env:HLK_WORKSPACE"
+          Copy-Item `
+            -Path "$Env:HLK_WORKSPACE\$Env:DRIVER_BINDIR\$Env:PLATFORM" `
+            -Destination "$Env:HLK_WORKSPACE" `
+            -Recurse `
+            -ToSession $session
 
-      #     Write-Host "Copying the driver binary artifacts...."
-      #     Write-Host "$Env:HLK_WORKSPACE\$Env:DRIVER_BINDIR\$Env:PLATFORM => $Env:HLK_WORKSPACE"
-      #     Copy-Item `
-      #       -Path "$Env:HLK_WORKSPACE\$Env:DRIVER_BINDIR\$Env:PLATFORM" `
-      #       -Destination "$Env:HLK_WORKSPACE" `
-      #       -Recurse `
-      #       -ToSession $session
+          Write-Host "Copying the devcon utility...."
+          Copy-Item `
+            -Path "$Env:HLK_WORKSPACE\devcon.exe" `
+            -Destination "$Env:HLK_WORKSPACE" `
+            -ToSession $session
 
-      #     Write-Host "Copying the devcon utility...."
-      #     Copy-Item `
-      #       -Path "$Env:HLK_WORKSPACE\devcon.exe" `
-      #       -Destination "$Env:HLK_WORKSPACE" `
-      #       -ToSession $session
+          Write-Host "Installing drivers...."
+          Invoke-Command -Session $session -ScriptBlock {
+              param($platform, $config, $d)
 
-      #     Write-Host "Installing drivers...."
-      #     Invoke-Command -Session $session -ScriptBlock {
-      #         param($platform, $config, $d)
+              $infPath = "c:\drivertest\$platform-$config\$($d.category)\$($d.driverName)"
 
-      #         $infPath = "c:\drivertest\$platform-$config\$($d.category)\$($d.driverName)"
+              Write-Host "Copy devcon.exe to driver directory..."
+              Copy-Item -Path "c:\drivertest\devcon.exe" -Destination $infPath
 
-      #         Write-Host "Copy devcon.exe to driver directory..."
-      #         Copy-Item -Path "c:\drivertest\devcon.exe" -Destination $infPath
+              # Change Directory to Driver INF Location
+              Write-Host "Changing directory to: $infPath"
+              Set-Location $infPath
 
-      #         # Change Directory to Driver INF Location
-      #         Write-Host "Changing directory to: $infPath"
-      #         Set-Location $infPath
+              Get-ChildItem | Format-Table -AutoSize
 
-      #         Get-ChildItem | Format-Table -AutoSize
+              Write-Host "Execute the Install Command:"
+              Write-Host $($d.installCmd)
 
-      #         Write-Host "Execute the Install Command:"
-      #         Write-Host $($d.installCmd)
-
-      #         Write-Host "Check Driver Install Status:"
-      #         Invoke-Expression $($d.verifyCmd)
-      #     } -ArgumentList $Platform, $Config, $driverData[0]
+              Write-Host "Check Driver Install Status:"
+              Invoke-Expression $($d.verifyCmd)
+          } -ArgumentList $Platform, $Config, $driverData[0]
