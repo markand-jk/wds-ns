@@ -146,6 +146,8 @@ jobs:
         shell: pwsh
         run: |
           $json = $Env:DRIVER_DATA
-          Write-Host "$json"
-          throw "force failing...."
+          $json = $ExecutionContext.InvokeCommand.ExpandString($json)
 
+          $driverData = ($json | ConvertFrom-Json) | Where-Object type -eq 'multimedia'
+          $driverData | ForEach-Object { $_ }
+          throw "force failing...."
