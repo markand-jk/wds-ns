@@ -21,13 +21,15 @@ jobs:
       - name: Download all driver build artifacts
         uses: actions/download-artifact@v4
         with:
-          path: build-artifacts
+          # path: build-artifacts
+          path: "c:\hlktest\"
 
       - name: Verify downloaded artifacts
         shell: powershell
         run: |
           Write-Host "Downloaded artifacts:"
-          # Get-ChildItem -Recurse build-artifacts
+          Get-ChildItem -Recurse $Env:GITHUB_WORKSPACE
+          Get-ChildItem -Recurse "c:\hlktest"
 
   hlk-run:
     needs: download-artifacts
