@@ -12,41 +12,41 @@ env:
   DRIVER_BINDIR: "build-artifacts"
 
 jobs:
-  download-artifacts:
-    runs-on: self-hosted
+  # download-artifacts:
+  #   runs-on: self-hosted
 
-    steps:
-      - name: Cleanup Workspace
-        shell: powershell
-        run: |
-          Write-Host "Cleaning workspace: $Env:GITHUB_WORKSPACE"
-          Remove-Item -Path (Join-Path $Env:GITHUB_WORKSPACE '*') -Recurse -Force
+  #   steps:
+  #     - name: Cleanup Workspace
+  #       shell: powershell
+  #       run: |
+  #         Write-Host "Cleaning workspace: $Env:GITHUB_WORKSPACE"
+  #         Remove-Item -Path (Join-Path $Env:GITHUB_WORKSPACE '*') -Recurse -Force
 
-      - name: Check for the HLK_WORKSPACE
-        shell: powershell
-        run: |
-          if (-not (Test-Path $Env:HLK_WORKSPACE)) {
-            throw "HLK_WORKSPACE does not exist: $Env:HLK_WORKSPACE"
-          }
+  #     - name: Check for the HLK_WORKSPACE
+  #       shell: powershell
+  #       run: |
+  #         if (-not (Test-Path $Env:HLK_WORKSPACE)) {
+  #           throw "HLK_WORKSPACE does not exist: $Env:HLK_WORKSPACE"
+  #         }
 
-      - name: Download all driver build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: ${{ env.DRIVER_BINDIR }}
+  #     - name: Download all driver build artifacts
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         path: ${{ env.DRIVER_BINDIR }}
 
-      - name: Copy driver build artifacts
-        shell: powershell
-        run: |
-          if (Test-Path (Join-Path $Env:HLK_WORKSPACE $Env:DRIVER_BINDIR)) {
-              Remove-Item -Path (Join-Path $Env:HLK_WORKSPACE $Env:DRIVER_BINDIR) -Recurse -Force
-          }
-          Copy-Item `
-            -Path (Join-Path $Env:GITHUB_WORKSPACE $Env:DRIVER_BINDIR) `
-            -Destination (Join-Path $Env:HLK_WORKSPACE $Env:DRIVER_BINDIR) `
-            -Recurse
+  #     - name: Copy driver build artifacts
+  #       shell: powershell
+  #       run: |
+  #         if (Test-Path (Join-Path $Env:HLK_WORKSPACE $Env:DRIVER_BINDIR)) {
+  #             Remove-Item -Path (Join-Path $Env:HLK_WORKSPACE $Env:DRIVER_BINDIR) -Recurse -Force
+  #         }
+  #         Copy-Item `
+  #           -Path (Join-Path $Env:GITHUB_WORKSPACE $Env:DRIVER_BINDIR) `
+  #           -Destination (Join-Path $Env:HLK_WORKSPACE $Env:DRIVER_BINDIR) `
+  #           -Recurse
 
   hlk-run:
-    needs: download-artifacts
+    # needs: download-artifacts
     runs-on: self-hosted
 
     strategy:
