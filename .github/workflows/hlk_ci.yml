@@ -120,10 +120,10 @@ jobs:
       - name: Install Drivers to DUT
         shell: pwsh
         run: |
+          # Get driver list from ENV
           $drivers = $Env:DRIVERS | ConvertFrom-Json
-          $drivers | ForEach-Object { $_ }
 
-
+          # Setup connection with the DUT
           $machine = $Env:DUT_HOSTNAME
           $user = $Env:DUT_USER
           $password = $Env:DUT_PASSWORD
@@ -159,7 +159,6 @@ jobs:
             -ToSession $session
 
           Write-Host "Installing drivers...."
-
           foreach ($driver in $drivers) {
             Invoke-Command -Session $session -ScriptBlock {
               param($hlkWorkspace, $platform, $driver)
@@ -177,7 +176,7 @@ jobs:
 
                 Get-ChildItem | Format-Table -AutoSize
 
-            } -ArgumentList $Env:HLK_WORKSPACE, $($Env:PLATFORM), $driver
+            } -ArgumentList $Env:HLK_WORKSPACE, $Env:PLATFORM, $driver
           }
 
           # Invoke-Command -Session $session -ScriptBlock {
