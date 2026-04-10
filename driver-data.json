@@ -5,17 +5,19 @@
         "Driver":  "simpleaudiosample",
         "Path":  "audio\\simpleaudiosample\\$Platform\\$Config\\package",
         "InfFile":  "SimpleAudioSample.inf",
+        "SysFile":  "SimpleAudioSample.sys",
         "CertificateFile":  "package.cer",
         "InstallCmd":  ".\\devcon.exe install SimpleAudioSample.inf Root\\SimpleAudioSample",
-        "VerifyCmd":  ".\\devcon find \"Root\\SimpleAudioSample\""
+        "VerifyCmd":  ".\\devcon status \"Root\\SimpleAudioSample\""
     },
     {
         "Type":  "Multimedia",
         "DriverCategory":  "audio",
         "Driver":  "sysvad",
         "Path":  "audio\\sysvad\\$Platform\\$Config\\package",
-        "InfFile":  "",
-        "CertificateFile":  "",
+        "InfFile":  "ComponentizedApoSample.inf, ComponentizedAudioSample.inf, ComponentizedAudioSampleExtension.inf",
+        "SysFile":  "TabletAudioSample.sys",
+        "CertificateFile":  "package.cer",
         "InstallCmd":  "",
         "VerifyCmd":  ""
     },
@@ -24,20 +26,22 @@
         "DriverCategory":  "audio",
         "Driver":  "SdcaVad",
         "Path":  "audio\\SoundWire\\Samples\\SdcaVad\\$Platform\\$Config\\package",
-        "InfFile":  "",
-        "CertificateFile":  "",
-        "InstallCmd":  "",
-        "VerifyCmd":  ""
+        "InfFile":  "SdcaVApo.inf, SdcaVCodec.inf, SdcaVDsp.inf, SdcaVXu.inf",
+        "SysFile":  "SDCAVCodec.sys, SDCAVDsp.sys, SDCAVXu.sys",
+        "CertificateFile":  "package.cer",
+        "InstallCmd":  ".\\devcon.exe install SdcaVDsp.inf SOUNDWIRETEST\\DSP; .\\devcon.exe install SdcaVCodec.inf Root\\SDCAVCodec",
+        "VerifyCmd":  ".\\devcon.exe status *Sdca*"
     },
     {
         "Type":  "Multimedia",
         "DriverCategory":  "audio",
         "Driver":  "AudioCodec",
         "Path":  "audio\\Acx\\Samples\\AudioCodec\\Driver\\$Platform\\$Config\\AudioCodec",
-        "InfFile":  "",
-        "CertificateFile":  "",
-        "InstallCmd":  "",
-        "VerifyCmd":  ""
+        "InfFile":  "AudioCodec.inf",
+        "SysFile":  "AudioCodec.sys",
+        "CertificateFile":  "AudioCodec.cer",
+        "InstallCmd":  ".\\devcon.exe install AudioCodec.inf ROOT\\AudioCodec",
+        "VerifyCmd":  ".\\devcon.exe status *AudioCodec*"
     },
     {
         "Type":  "Debug",
@@ -45,6 +49,7 @@
         "Driver":  "avscamera",
         "Path":  "avstream\\avscamera\\$Platform\\$Config\\package",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -55,6 +60,7 @@
         "Driver":  "avshws",
         "Path":  "avstream\\avshws\\$Platform\\$Config\\avshws",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -65,6 +71,7 @@
         "Driver":  "avssamp",
         "Path":  "avstream\\avssamp\\$Platform\\$Config\\avssamp",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -75,6 +82,7 @@
         "Driver":  "avssamp",
         "Path":  "avstream\\avssamp\\$Platform\\$Config\\avssamp",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -85,6 +93,7 @@
         "Driver":  "bthecho-srv",
         "Path":  "bluetooth\\bthecho\\bthsrv\\sys\\$Platform\\$Config\\BthEchoSampleSrv",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -95,6 +104,7 @@
         "Driver":  "bthecho-cli",
         "Path":  "bluetooth\\bthecho\\bthcli\\sys\\$Platform\\$Config\\BthEchoSampleCli",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -105,6 +115,7 @@
         "Driver":  "serialhcibus",
         "Path":  "bluetooth\\serialhcibus\\WDK\\$Platform\\$Config\\SerialBusWdk",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -115,6 +126,7 @@
         "Driver":  "\t\tcdfs",
         "Path":  "\tfilesys\\cdfs\\$Platform\\$Config",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -125,6 +137,7 @@
         "Driver":  "\t\tfastfat",
         "Path":  "filesys\\cdfs\\$Platform\\$Config",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -135,6 +148,7 @@
         "Driver":  "avscan",
         "Path":  "filesys\\minifilter\\avscan\\filter\\$Platform\\$Config\\avsscan",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -145,6 +159,7 @@
         "Driver":  "cancelSafe",
         "Path":  "filesys\\minifilter\\cancelSafe\\$Platform\\$Config\\cancelSafe",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -155,6 +170,7 @@
         "Driver":  "cdo",
         "Path":  "filesys\\minifilter\\cdo\\$Platform\\$Config\\cdo",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -165,6 +181,7 @@
         "Driver":  "change",
         "Path":  "filesys\\minifilter\\change\\$Platform\\$Config\\change",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -175,6 +192,7 @@
         "Driver":  "ctx",
         "Path":  "filesys\\minifilter\\ctx\\$Platform\\$Config\\ctx",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -185,6 +203,7 @@
         "Driver":  "delete",
         "Path":  "filesys\\minifilter\\delete\\$Platform\\$Config\\delete",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -195,6 +214,7 @@
         "Driver":  "MetadataManager",
         "Path":  "filesys\\minifilter\\MetadataManager\\$Platform\\$Config\\MetadataManager",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -205,6 +225,7 @@
         "Driver":  "NameChanger",
         "Path":  "filesys\\minifilter\\NameChanger\\$Platform\\$Config\\NameChanger",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -215,6 +236,7 @@
         "Driver":  "nullFilter",
         "Path":  "filesys\\minifilter\\nullFilter\\$Platform\\$Config\\nullFilter",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -225,6 +247,7 @@
         "Driver":  "passThrough",
         "Path":  "filesys\\minifilter\\passThrough\\$Platform\\$Config\\passThrough",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -235,6 +258,7 @@
         "Driver":  "scanner",
         "Path":  "filesys\\minifilter\\scanner\\$Platform\\$Config\\scanner",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -245,6 +269,7 @@
         "Driver":  "simrep",
         "Path":  "filesys\\minifilter\\simrep\\$Platform\\$Config\\simrep",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -255,6 +280,7 @@
         "Driver":  "swapBuffers",
         "Path":  "filesys\\minifilter\\swapBuffers\\$Platform\\$Config\\swapBuffers",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -265,6 +291,7 @@
         "Driver":  "gnssUmdf",
         "Path":  "gnss\\gnssUmdf\\bin\\$Platform\\$Config\\gnssUmdf",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -275,6 +302,7 @@
         "Driver":  "simdevicekmdf",
         "Path":  "gpio\\samples\\simdevice\\kmdf\\$Platform\\$Config\\simdevice",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -285,6 +313,7 @@
         "Driver":  "simdeviceumdf",
         "Path":  "gpio\\samples\\simdevice\\umdf\\$Platform\\$Config\\simdeviceumdf",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -295,6 +324,7 @@
         "Driver":  "simgpio",
         "Path":  "gpio\\samples\\simgpio\\$Platform\\$Config\\simgpio",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -305,6 +335,7 @@
         "Driver":  "simgpio_i2c",
         "Path":  "gpio\\samples\\simgpio_i2c\\$Platform\\$Config\\simgpio_i2c",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -315,6 +346,7 @@
         "Driver":  "firefly",
         "Path":  "hid\\firefly\\driver\\$Platform\\$Config\\firefly",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -325,6 +357,7 @@
         "Driver":  "hclient",
         "Path":  "hid\\hclient\\$Platform\\$Config\\hclient",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -335,6 +368,7 @@
         "Driver":  "hidusbfx2",
         "Path":  "hid\\hidusbfx2\\$Platform\\$Config\\hidusbfx2",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -345,6 +379,7 @@
         "Driver":  "vhidmini2",
         "Path":  "hid\\vhidmini2\\driver\\kmdf\\$Platform\\$Config\\vhidmini",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -355,6 +390,7 @@
         "Driver":  "vhidmini2",
         "Path":  "hid\\vhidmini2\\driver\\umdf2\\$Platform\\$Config\\VhidminiUm",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -365,6 +401,7 @@
         "Driver":  "kbfilter",
         "Path":  "input\\kbfilter\\sys\\$Platform\\$Config\\kbfilter",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -375,6 +412,7 @@
         "Driver":  "layout",
         "Path":  "input\\layout\\all_kbds\\$Platform\\$Config\\layout",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -385,6 +423,7 @@
         "Driver":  "moufiltr",
         "Path":  "input\\moufiltr\\$Platform\\$Config\\moufiltr",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -395,6 +434,7 @@
         "Driver":  "fakemodem",
         "Path":  "network\\modem\\fakemodem\\$Platform\\$Config\\fakemodem",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -405,6 +445,7 @@
         "Driver":  "msforwardext",
         "Path":  "network\\ndis\\extension\\samples\\forward\\$Platform\\$Config\\msforwardext",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -415,6 +456,7 @@
         "Driver":  "mspassthroughext",
         "Path":  "network\\ndis\\extension\\samples\\passthrough\\$Platform\\$Config\\mspassthroughext",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -425,6 +467,7 @@
         "Driver":  "ndislwf",
         "Path":  "network\\ndis\\filter\\forward\\$Platform\\$Config\\ndislwf",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -435,6 +478,7 @@
         "Driver":  "mux",
         "Path":  "network\\ndis\\mux\\driver\\60\\novlan\\$Platform\\$Config\\mux",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -445,6 +489,7 @@
         "Driver":  "muxvlan",
         "Path":  "network\\ndis\\mux\\driver\\60\\vlan\\$Platform\\$Config\\muxvlan",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -455,6 +500,7 @@
         "Driver":  "ndisprot60",
         "Path":  "network\\ndis\\ndisprot\\6x\\sys\\60\\$Platform\\$Config\\ndisprot60",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -465,6 +511,7 @@
         "Driver":  "ndisprot630",
         "Path":  "network\\ndis\\ndisprot\\6x\\sys\\630\\$Platform\\$Config\\ndisprot630",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -475,6 +522,7 @@
         "Driver":  "ndisprot_kmdf",
         "Path":  "network\\ndis\\ndisprot_kmdf\\$Platform\\$Config\\package",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -485,6 +533,7 @@
         "Driver":  "netvmini60",
         "Path":  "network\\ndis\\netvmini\\6x\\60\\$Platform\\$Config\\netvmini60",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -495,6 +544,7 @@
         "Driver":  "netvmini620",
         "Path":  "network\\ndis\\netvmini\\6x\\620\\$Platform\\$Config\\netvmini620",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -505,6 +555,7 @@
         "Driver":  "netvmini630",
         "Path":  "network\\ndis\\netvmini\\6x\\630\\$Platform\\$Config\\netvmini630",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -515,6 +566,7 @@
         "Driver":  "netvmini680",
         "Path":  "network\\ndis\\netvmini\\6x\\680\\$Platform\\$Config\\netvmini680",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -525,6 +577,7 @@
         "Driver":  "ddproxy",
         "Path":  "network\\trans\\ddproxy\\sys\\$Platform\\$Config\\ddproxy",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -535,6 +588,7 @@
         "Driver":  "msnmntr",
         "Path":  "network\\trans\\msnmntr\\sys\\$Platform\\$Config\\msnmntr",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -545,6 +599,7 @@
         "Driver":  "stmedit",
         "Path":  "network\\trans\\stmedit\\sys\\$Platform\\$Config\\stmedit",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -555,6 +610,7 @@
         "Driver":  "WFPSamplerCalloutDriver",
         "Path":  "network\\trans\\WFPSampler\\sys\\$Platform\\$Config\\WFPSamplerCalloutDriver",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -565,6 +621,7 @@
         "Driver":  "cxwmbclass",
         "Path":  "network\\wwan\\cxwmbclass\\$Platform\\$Config\\cxwmbclass",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -575,6 +632,7 @@
         "Driver":  "NfcCxSample",
         "Path":  "\tnfc\\NfcCxSample\\$Platform\\$Config\\windows-drivertemplate-nfc",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -585,6 +643,7 @@
         "Driver":  "net",
         "Path":  "nfp\\net\\exe\\x64\\Release",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -595,6 +654,7 @@
         "Driver":  "sampleacpipep",
         "Path":  "pofx\\PEP\\acpi\\$Platform\\$Config\\sampleacpipep",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -605,6 +665,7 @@
         "Driver":  "SingleComponentSingleStateUm",
         "Path":  "pofx\\UMDF2\\Driver\\SingleComp\\$Platform\\$Config\\SingleComponentSingleStateUm",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -615,6 +676,7 @@
         "Driver":  "SingleComponentFStateDriver",
         "Path":  "pofx\\WDF\\Driver\\SingleComp\\$Platform\\$Config\\SingleComponentFStateDriver",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -625,6 +687,7 @@
         "Driver":  "WdfMultiComp",
         "Path":  "pofx\\WDF\\Driver\\MultiComp\\driver\\$Platform\\$Config\\WdfMultiComp",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -635,6 +698,7 @@
         "Driver":  "SampleBarcodeScannerDrv",
         "Path":  "pos\\drivers\\barcodescanner\\$Platform\\$Config\\SampleBarcodeScannerDrv",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -645,6 +709,7 @@
         "Driver":  "SampleMagneticStripeReaderDrv",
         "Path":  "pos\\drivers\\MagneticStripeReader\\$Platform\\$Config\\SampleMagneticStripeReaderDrv",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -655,6 +720,7 @@
         "Driver":  "plclient",
         "Path":  "powerlimit\\plclient\\$Platform\\$Config\\plclient",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -665,6 +731,7 @@
         "Driver":  "plpolicy",
         "Path":  "powerlimit\\plpolicy\\$Platform\\$Config\\plpolicy",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -675,6 +742,7 @@
         "Driver":  "prmfuncsample",
         "Path":  "prm\\PrmFunc\\$Platform\\$Config\\prmfuncsample",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -685,6 +753,7 @@
         "Driver":  "sdhc",
         "Path":  "sd\\miniport\\sdhc\\inbox\\$Platform\\$Config\\sdhc",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -695,6 +764,7 @@
         "Driver":  "elam",
         "Path":  "security\\elam\\$Platform\\$Config\\elamsample",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -705,6 +775,7 @@
         "Driver":  "Activity",
         "Path":  "sensors\\Activity\\$Platform\\$Config\\Activity",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -715,6 +786,7 @@
         "Driver":  "ADXL345Acc",
         "Path":  "sensors\\ADXL345Acc\\$Platform\\$Config\\ADXL345Acc",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -725,6 +797,7 @@
         "Driver":  "CustomSensors",
         "Path":  "sensors\\CustomSensors\\$Platform\\$Config\\CustomSensors",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -735,6 +808,7 @@
         "Driver":  "Fusion",
         "Path":  "sensors\\Fusion\\$Platform\\$Config\\Fusion",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -745,6 +819,7 @@
         "Driver":  "Pedometer",
         "Path":  "sensors\\Pedometer\\$Platform\\$Config\\Pedometer",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -755,6 +830,7 @@
         "Driver":  "SensorsComboDriver",
         "Path":  "sensors\\SensorsComboDriver\\$Platform\\$Config\\SensorsComboDriver",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -765,6 +841,7 @@
         "Driver":  "SimpleDeviceOrientationSensor",
         "Path":  "sensors\\SimpleDeviceOrientationSensor\\$Platform\\$Config\\SimpleDeviceOrientationSensor",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -775,6 +852,7 @@
         "Driver":  "serenum",
         "Path":  "serial\\serenum\\$Platform\\$Config\\SerEnum_sample",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -785,6 +863,7 @@
         "Driver":  "serial",
         "Path":  "serial\\serial\\$Platform\\$Config\\wdfserial",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -795,6 +874,7 @@
         "Driver":  "VirtualSerial2",
         "Path":  "serial\\VirtualSerial2\\$Platform\\$Config\\VirtualSerial2um",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -805,6 +885,7 @@
         "Driver":  "devcon",
         "Path":  "setup\\devcon\\x64\\Release",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -815,6 +896,7 @@
         "Driver":  "func",
         "Path":  "simbatt\\func\\$Platform\\$Config\\simbatt",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -825,6 +907,7 @@
         "Driver":  "Pscr",
         "Path":  "smartcrd\\pscr\\$Platform\\$Config\\Pscr",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -835,6 +918,7 @@
         "Driver":  "SpbTestTool",
         "Path":  "spb\\SpbTestTool\\sys\\$Platform\\$Config\\SpbTestTool",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
@@ -845,6 +929,7 @@
         "Driver":  "lsi_u3",
         "Path":  "storage\\miniports\\lsi_u3\\src\\$Platform\\$Config\\lsi_u3",
         "InfFile":  "",
+        "SysFile":  "",
         "CertificateFile":  "",
         "InstallCmd":  "",
         "VerifyCmd":  ""
