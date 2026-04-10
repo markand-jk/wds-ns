@@ -161,15 +161,15 @@ jobs:
           Write-Host "Installing drivers...."
           foreach ($driver in $drivers) {
             Invoke-Command -Session $session -ScriptBlock {
-              param($hlkWorkspace, $platform, $driver)
+              param($workspace, $platform, $driver)
 
-              $driverPath = Join-Path hlkWorkspace `
+              $driverPath = Join-Path $workspace `
                       "$platform\$($driver.DriverCategory)\$($driver.Driver)"
 
                 Write-Host ">>> $driverPath"
 
                 Write-Host "Copy devcon.exe to driver directory..."
-                Copy-Item -Path "$hlkWorkspace\devcon.exe" -Destination $driverPath
+                Copy-Item -Path "$workspace\devcon.exe" -Destination $driverPath
 
                 Write-Host "Changing directory to: $driverPath"
                 Set-Location $driverPath
