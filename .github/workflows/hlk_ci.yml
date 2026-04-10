@@ -166,36 +166,28 @@ jobs:
               $driverPath = Join-Path $workspace `
                       "$platform\$($driver.DriverCategory)\$($driver.Driver)"
 
-                Write-Host ">>> $driverPath"
+              Write-Host ">>> $driverPath"
 
-                Write-Host "Copy devcon.exe to driver directory..."
-                Copy-Item -Path "$workspace\devcon.exe" -Destination $driverPath
+              Write-Host "Copy devcon.exe to driver directory..."
+              Copy-Item -Path "$workspace\devcon.exe" -Destination $driverPath
 
-                Write-Host "Changing directory to: $driverPath"
-                Set-Location $driverPath
+              Write-Host "Changing directory to: $driverPath"
+              Set-Location $driverPath
 
-                Get-ChildItem | Format-Table -AutoSize
+              Get-ChildItem | Format-Table -AutoSize
 
+              Write-Host "Execute the Install Command:"
+              if ($driver.PSObject.Properties.Name -contains 'InstallCmd' -and
+                  -not [string]::IsNullOrWhiteSpace($driver.InstallCmd)) {
+
+                Write-Host $($driver.InstallCmd)
+                Invoke-Expression $($driver.VerifyCmd)
+
+                if ($driver.PSObject.Properties.Name -contains 'InstallCmd' -and
+                    -not [string]::IsNullOrWhiteSpace($driver.InstallCmd)) {
+                  Write-Host "Check Driver Install Status:"
+                  Invoke-Expression $($driver.VerifyCmd)
+                }
+              }
             } -ArgumentList $Env:HLK_WORKSPACE, $Env:PLATFORM, $driver
           }
-
-          # Invoke-Command -Session $session -ScriptBlock {
-          #     param($platform, $config, $d)
-
-          #     $infPath = "c:\drivertest\$platform-$config\$($d.category)\$($d.driverName)"
-
-          #     Write-Host "Copy devcon.exe to driver directory..."
-          #     Copy-Item -Path "c:\drivertest\devcon.exe" -Destination $infPath
-
-          #     # Change Directory to Driver INF Location
-          #     Write-Host "Changing directory to: $infPath"
-          #     Set-Location $infPath
-
-          #     Get-ChildItem | Format-Table -AutoSize
-
-          #     Write-Host "Execute the Install Command:"
-          #     Write-Host $($d.installCmd)
-
-          #     Write-Host "Check Driver Install Status:"
-          #     Invoke-Expression $($d.verifyCmd)
-          # } -ArgumentList $Platform, $Config, $driverData[0]
