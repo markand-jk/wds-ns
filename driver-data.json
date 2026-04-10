@@ -40,7 +40,7 @@
         "VerifyCmd":  ""
     },
     {
-        "Type":  "Multimedia",
+        "Type":  "Debug",
         "DriverCategory":  "avstream",
         "Driver":  "avscamera",
         "Path":  "avstream\\avscamera\\$Platform\\$Config\\package",
@@ -50,7 +50,7 @@
         "VerifyCmd":  ""
     },
     {
-        "Type":  "Multimedia",
+        "Type":  "Debug",
         "DriverCategory":  "avstream",
         "Driver":  "avshws",
         "Path":  "avstream\\avshws\\$Platform\\$Config\\avshws",
@@ -60,7 +60,7 @@
         "VerifyCmd":  ""
     },
     {
-        "Type":  "Multimedia",
+        "Type":  "Debug",
         "DriverCategory":  "avstream",
         "Driver":  "avssamp",
         "Path":  "avstream\\avssamp\\$Platform\\$Config\\avssamp",
@@ -70,7 +70,7 @@
         "VerifyCmd":  ""
     },
     {
-        "Type":  "Multimedia",
+        "Type":  "Debug",
         "DriverCategory":  "avstream",
         "Driver":  "avssamp",
         "Path":  "avstream\\avssamp\\$Platform\\$Config\\avssamp",
