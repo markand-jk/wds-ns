@@ -23,7 +23,7 @@ jobs:
     secrets: inherit
 
   hlk-test:
-    needs: build-samples
+    # needs: build-samples
     uses: markand-jk/wds-ns/.github/workflows/hlk_ci.yml@main
     with:
       driverType: ${{ inputs.driverType }}
