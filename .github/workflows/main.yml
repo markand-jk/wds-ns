@@ -12,15 +12,9 @@ on:
           - Default
 
 jobs:
-  build-samples:
-    uses: markand-jk/wds-ns/.github/workflows/build_ci.yml@main
-    # strategy:
-    #   max-parallel: 1
-    #   matrix:
-    #     platform: [ "x64", "ARM64" ]
-    # with:
-    #   platform: ${{ matrix.platform }}
-    secrets: inherit
+  # build-samples:
+  #   uses: markand-jk/wds-ns/.github/workflows/build_ci.yml@main
+  #   secrets: inherit
 
   hlk-test:
     # needs: build-samples
